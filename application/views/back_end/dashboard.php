@@ -4,9 +4,9 @@
     <section class="content-header">
       <h1>
         <i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard
-        <small>CRM System Control Panel</small>
+        <small>Environment SIT Control Panel</small>
       </h1>
-    </section>
+    </section>  
     
     <section class="content">
         <div class="row">
@@ -89,11 +89,11 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Sr. #</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-				  <th>User Name</th>
+                  <th>Serverid</th>
+                  <th>Server Name</th>
+                  <th>IP address</th>
+                  <th>System Information</th>
+				          <th>Description</th>
                   <th>Action</th>
                 </tr>
                 </thead>
@@ -108,12 +108,12 @@
                     ?>
 					
                 <tr>
-                  <td><?php echo $i;?>.</td>
-                  <td><?php echo $record->fullname; ?></td>
-                  <td><?php if($record->email) { echo $record->email; } else { echo 'N/A';}?></td>
-                  <td> <?php if($record->phone) { echo $record->phone; } else { echo 'N/A';}?></td>
-				  <td> <?php if($record->username) { echo $record->username; } else { echo 'N/A';}?></td>
-                  <td><a class="btn btn-sm btn-primary" href="<?php echo base_url().'viewCustomer/'.$record->id; ?>" title="View"><i class="fa fa-history"></i></a></td>
+                  <td><?php echo $i;?></td>
+                  <td><?php echo $record->servername; ?></td>
+                  <td><?php echo $record->ip_address; ?></td>
+                  <td> <?php if($record->system_info) { echo $record->system_info; } else { echo 'N/A';}?></td>
+				          <td> <?php if($record->description) { echo $record->description; } else { echo 'N/A';}?></td>
+                  <td><a class="btn btn-sm btn-primary" href="<?php echo base_url().'viewServer/'.$record->serverid; ?>" title="View"><i class="fa fa-history"></i></a></td>
                 </tr>
 				<?php
                         $i++; }

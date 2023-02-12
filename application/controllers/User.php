@@ -29,7 +29,7 @@ class User extends BaseController
         $this->global['pageTitle'] = 'WorldTrack GPS : Dashboard';
 		
 		$data['searchBody'] = 'Yes';
-		$data['customerRecords'] = $this->user_model->customerListing();
+		$data['customerRecords'] = $this->user_model->serverListing();
         
         $this->loadViews("back_end/dashboard", $this->global, $data , NULL);
     }
@@ -132,11 +132,12 @@ class User extends BaseController
                 $roleId = $this->input->post('role');
                 $mobile = $this->security->xss_clean($this->input->post('mobile'));
                 
-                $userInfo = array('email'=>$email, 'password'=>getHashedPassword($password), 'roleId'=>$roleId, 'name'=> $name,
+                $userInfo = array('email'=>$email, 'password'=>$password, 'roleId'=>$roleId, 'name'=> $name,
                                     'mobile'=>$mobile, 'createdBy'=>$this->vendorId, 'createdDtm'=>date('Y-m-d H:i:s'));
                 
                 $this->load->model('user_model');
                 $result = $this->user_model->addNewUser($userInfo);
+                var_dump($result);
                 
                 if($result > 0)
                 {

@@ -16,17 +16,17 @@ class User_model extends CI_Model
      */
     function userListingCount($searchText = '')
     {
-        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, BaseTbl.createdDtm, Role.role');
-        $this->db->from('tbl_users as BaseTbl');
-        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
+        $this->db->select('u.userId, u.email, u.name, u.mobile, u.createdDtm, r.role');
+        $this->db->from('users as u');
+        $this->db->join('roles as r', 'r.roleId = u.roleId','left');
         if(!empty($searchText)) {
-            $likeCriteria = "(BaseTbl.email  LIKE '%".$searchText."%'
-                            OR  BaseTbl.name  LIKE '%".$searchText."%'
-                            OR  BaseTbl.mobile  LIKE '%".$searchText."%')";
+            $likeCriteria = "(u.email  LIKE '%".$searchText."%'
+                            OR  u.name  LIKE '%".$searchText."%'
+                            OR  u.mobile  LIKE '%".$searchText."%')";
             $this->db->where($likeCriteria);
         }
-        $this->db->where('BaseTbl.isDeleted', 0);
-        $this->db->where('BaseTbl.roleId !=', 1);
+        $this->db->where('u.isDeleted', 0);
+        $this->db->where('u.roleId !=', 1);
         $query = $this->db->get();
         
         return $query->num_rows();
@@ -41,18 +41,18 @@ class User_model extends CI_Model
      */
     function userListing($searchText = '', $page, $segment)
     {
-        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, BaseTbl.createdDtm, Role.role');
-        $this->db->from('tbl_users as BaseTbl');
-        $this->db->join('tbl_roles as Role', 'Role.roleId = BaseTbl.roleId','left');
+        $this->db->select('u.userId, u.email, u.name, u.mobile, u.createdDtm, r.role');
+        $this->db->from('users as u');
+        $this->db->join('roles as r', 'r.roleId = u.roleId','left');
         if(!empty($searchText)) {
-            $likeCriteria = "(BaseTbl.email  LIKE '%".$searchText."%'
-                            OR  BaseTbl.name  LIKE '%".$searchText."%'
-                            OR  BaseTbl.mobile  LIKE '%".$searchText."%')";
+            $likeCriteria = "(u.email  LIKE '%".$searchText."%'
+                            OR  u.name  LIKE '%".$searchText."%'
+                            OR  u.mobile  LIKE '%".$searchText."%')";
             $this->db->where($likeCriteria);
         }
-        $this->db->where('BaseTbl.isDeleted', 0);
-        $this->db->where('BaseTbl.roleId !=', 1);
-        $this->db->order_by('BaseTbl.userId', 'DESC');
+        $this->db->where('u.isDeleted', 0);
+        $this->db->where('u.roleId !=', 1);
+        $this->db->order_by('u.userId', 'DESC');
         $this->db->limit($page, $segment);
         $query = $this->db->get();
         
@@ -65,15 +65,15 @@ class User_model extends CI_Model
      * @return array $result : This is result
      */
   
-  function customerListing()
+  function serverListing()
     {
-        $this->db->select('BaseTbl.id, BaseTbl.email, BaseTbl.fullname, BaseTbl.username, BaseTbl.phone, BaseTbl.created_at');
-        $this->db->from('tbl_customers as BaseTbl');
-        $this->db->where('BaseTbl.status', 'A');
-        $this->db->order_by('BaseTbl.id', 'DESC');
+        $this->db->select('s.serverid, s.servername, s.ip_address, s.system_info, s.description');
+        $this->db->from('servers as s');
+        $this->db->where('s.status', 'A');
+        $this->db->order_by('s.serverid', 'ASC');
         $query = $this->db->get();
         
-        $result = $query->result();        
+        $result = $query->result();   
         return $result;
     }
 	  
@@ -84,8 +84,8 @@ class User_model extends CI_Model
     function getUserRoles()
     {
         $this->db->select('roleId, role');
-        $this->db->from('tbl_roles');
-        $this->db->where('roleId !=', 1);
+        $this->db->from('roles');
+        // $this->db->where('roleId !=', 1);
         $query = $this->db->get();
         
         return $query->result();
@@ -100,7 +100,7 @@ class User_model extends CI_Model
     function checkEmailExists($email, $userId = 0)
     {
         $this->db->select("email");
-        $this->db->from("tbl_users");
+        $this->db->from("users");
         $this->db->where("email", $email);   
         $this->db->where("isDeleted", 0);
         if($userId != 0){
@@ -119,11 +119,13 @@ class User_model extends CI_Model
     function addNewUser($userInfo)
     {
         $this->db->trans_start();
-        $this->db->insert('tbl_users', $userInfo);
+        $this->db->insert('users', $userInfo);
         
         $insert_id = $this->db->insert_id();
         
         $this->db->trans_complete();
+
+        var_dump($insert_id);
         
         return $insert_id;
     }
@@ -136,7 +138,7 @@ class User_model extends CI_Model
     function getUserInfo($userId)
     {
         $this->db->select('userId, name, email, mobile, roleId');
-        $this->db->from('tbl_users');
+        $this->db->from('users');
         $this->db->where('isDeleted', 0);
 		$this->db->where('roleId !=', 1);
         $this->db->where('userId', $userId);
@@ -154,7 +156,7 @@ class User_model extends CI_Model
     function editUser($userInfo, $userId)
     {
         $this->db->where('userId', $userId);
-        $this->db->update('tbl_users', $userInfo);
+        $this->db->update('users', $userInfo);
         
         return TRUE;
     }
@@ -169,7 +171,7 @@ class User_model extends CI_Model
     function deleteUser($userId, $userInfo)
     {
         $this->db->where('userId', $userId);
-        $this->db->update('tbl_users', $userInfo);
+        $this->db->update('users', $userInfo);
         
         return $this->db->affected_rows();
     }
@@ -184,7 +186,7 @@ class User_model extends CI_Model
         $this->db->select('userId, password');
         $this->db->where('userId', $userId);        
         $this->db->where('isDeleted', 0);
-        $query = $this->db->get('tbl_users');
+        $query = $this->db->get('users');
         
         $user = $query->result();
 
@@ -208,7 +210,7 @@ class User_model extends CI_Model
     {
         $this->db->where('userId', $userId);
         $this->db->where('isDeleted', 0);
-        $this->db->update('tbl_users', $userInfo);
+        $this->db->update('users', $userInfo);
         
         return $this->db->affected_rows();
     }
@@ -220,23 +222,23 @@ class User_model extends CI_Model
      */
     function loginHistoryCount($userId, $searchText, $fromDate, $toDate)
     {
-        $this->db->select('BaseTbl.userId, BaseTbl.sessionData, BaseTbl.machineIp, BaseTbl.userAgent, BaseTbl.agentString, BaseTbl.platform, BaseTbl.createdDtm');
+        $this->db->select('ll.userId, ll.sessionData, ll.machineIp, ll.userAgent, ll.agentString, ll.platform, ll.createdDtm');
         if(!empty($searchText)) {
-            $likeCriteria = "(BaseTbl.sessionData LIKE '%".$searchText."%')";
+            $likeCriteria = "(ll.sessionData LIKE '%".$searchText."%')";
             $this->db->where($likeCriteria);
         }
         if(!empty($fromDate)) {
-            $likeCriteria = "DATE_FORMAT(BaseTbl.createdDtm, '%Y-%m-%d' ) >= '".date('Y-m-d', strtotime($fromDate))."'";
+            $likeCriteria = "DATE_FORMAT(u.createdDtm, '%Y-%m-%d' ) >= '".date('Y-m-d', strtotime($fromDate))."'";
             $this->db->where($likeCriteria);
         }
         if(!empty($toDate)) {
-            $likeCriteria = "DATE_FORMAT(BaseTbl.createdDtm, '%Y-%m-%d' ) <= '".date('Y-m-d', strtotime($toDate))."'";
+            $likeCriteria = "DATE_FORMAT(u.createdDtm, '%Y-%m-%d' ) <= '".date('Y-m-d', strtotime($toDate))."'";
             $this->db->where($likeCriteria);
         }
         if($userId >= 1){
-            $this->db->where('BaseTbl.userId', $userId);
+            $this->db->where('ll.userId', $userId);
         }
-        $this->db->from('tbl_last_login as BaseTbl');
+        $this->db->from('last_login as ll');
         $query = $this->db->get();
         
         return $query->num_rows();
@@ -251,24 +253,24 @@ class User_model extends CI_Model
      */
     function loginHistory($userId, $searchText, $fromDate, $toDate, $page, $segment)
     {
-        $this->db->select('BaseTbl.userId, BaseTbl.sessionData, BaseTbl.machineIp, BaseTbl.userAgent, BaseTbl.agentString, BaseTbl.platform, BaseTbl.createdDtm');
-        $this->db->from('tbl_last_login as BaseTbl');
+        $this->db->select('ll.userId, ll.sessionData, ll.machineIp, ll.userAgent, ll.agentString, ll.platform, ll.createdDtm');
+        $this->db->from('last_login as ll');
         if(!empty($searchText)) {
-            $likeCriteria = "(BaseTbl.sessionData  LIKE '%".$searchText."%')";
+            $likeCriteria = "(ll.sessionData  LIKE '%".$searchText."%')";
             $this->db->where($likeCriteria);
         }
         if(!empty($fromDate)) {
-            $likeCriteria = "DATE_FORMAT(BaseTbl.createdDtm, '%Y-%m-%d' ) >= '".date('Y-m-d', strtotime($fromDate))."'";
+            $likeCriteria = "DATE_FORMAT(u.createdDtm, '%Y-%m-%d' ) >= '".date('Y-m-d', strtotime($fromDate))."'";
             $this->db->where($likeCriteria);
         }
         if(!empty($toDate)) {
-            $likeCriteria = "DATE_FORMAT(BaseTbl.createdDtm, '%Y-%m-%d' ) <= '".date('Y-m-d', strtotime($toDate))."'";
+            $likeCriteria = "DATE_FORMAT(u.createdDtm, '%Y-%m-%d' ) <= '".date('Y-m-d', strtotime($toDate))."'";
             $this->db->where($likeCriteria);
         }
         if($userId >= 1){
-            $this->db->where('BaseTbl.userId', $userId);
+            $this->db->where('ll.userId', $userId);
         }
-        $this->db->order_by('BaseTbl.id', 'DESC');
+        $this->db->order_by('ll.id', 'DESC');
         $this->db->limit($page, $segment);
         $query = $this->db->get();
         
@@ -284,7 +286,7 @@ class User_model extends CI_Model
     function getUserInfoById($userId)
     {
         $this->db->select('userId, name, email, mobile, roleId');
-        $this->db->from('tbl_users');
+        $this->db->from('users');
         $this->db->where('isDeleted', 0);
         $this->db->where('userId', $userId);
         $query = $this->db->get();
@@ -299,11 +301,11 @@ class User_model extends CI_Model
      */
     function getUserInfoWithRole($userId)
     {
-        $this->db->select('BaseTbl.userId, BaseTbl.email, BaseTbl.name, BaseTbl.mobile, BaseTbl.roleId, Roles.role');
-        $this->db->from('tbl_users as BaseTbl');
-        $this->db->join('tbl_roles as Roles','Roles.roleId = BaseTbl.roleId');
-        $this->db->where('BaseTbl.userId', $userId);
-        $this->db->where('BaseTbl.isDeleted', 0);
+        $this->db->select('u.userId, u.email, u.name, u.mobile, u.roleId, r.role');
+        $this->db->from('users as u');
+        $this->db->join('roles as r','r.roleId = u.roleId');
+        $this->db->where('u.userId', $userId);
+        $this->db->where('u.isDeleted', 0);
         $query = $this->db->get();
         
         return $query->row();

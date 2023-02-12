@@ -72,17 +72,17 @@ $route['profile/(:any)'] = "user/profile/$1";
 $route['profileUpdate'] = "user/profileUpdate";
 $route['profileUpdate/(:any)'] = "user/profileUpdate/$1";
 
-//Customers Module
+//Servers Module
 
-$route['customerListing'] = 'customers/customerListing';
-$route['customerListing/(:num)'] = "customers/CustomerListing/$1";
-$route['addNewCustomer'] = "customers/addNewCustomer";
-$route['modifyCustomer'] = "customers/modifyCustomer";
-$route['viewCustomer/(:num)'] = "customers/viewCustomer/$1";
-$route['modifyCustomer/(:num)'] = "customers/modifyCustomer/$1";
-$route['editCustomer'] = "customers/editCustomer";
-$route['deleteCustomer'] = "customers/deleteCustomer";
-$route['addNewCust'] = "customers/addNewCust";
+$route['serverListing'] = 'servers/serverListing';
+$route['serverListing/(:num)'] = "servers/serverListing/$1";
+$route['addNewServer'] = "servers/addNewServer";
+$route['modifyServer'] = "servers/modifyServer";
+$route['viewServer/(:num)'] = "servers/viewServer/$1";
+$route['modifyServer/(:num)'] = "servers/modifyServer/$1";
+$route['editServer'] = "servers/editServer";
+$route['deleteServer'] = "servers/deleteServer";
+$route['addNewServ'] = "servers/addNewServ";
 
 //Vehicles Module
 

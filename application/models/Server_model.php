@@ -7,19 +7,19 @@
  * @version : 1.1
  * @since : 15 November 2019
  */
-class Customer_model extends CI_Model
+class Server_model extends CI_Model
 {
     
 	   /**
      * This function is used to get the customer listing 
      * @return array $result : This is result
      */
-    function customerListing()
+    function serverListing()
     {
-        $this->db->select('BaseTbl.id, BaseTbl.email, BaseTbl.fullname, BaseTbl.username, BaseTbl.phone, BaseTbl.created_at');
-        $this->db->from('tbl_customers as BaseTbl');
+        $this->db->select('BaseTbl.serverid, BaseTbl.servername, BaseTbl.ip_address, BaseTbl.system_info, BaseTbl.description');
+        $this->db->from('servers as BaseTbl');
         $this->db->where('BaseTbl.status', 'A');
-        $this->db->order_by('BaseTbl.id', 'DESC');
+        $this->db->order_by('BaseTbl.serverid', 'ASC');
         $query = $this->db->get();
         
         $result = $query->result();        
@@ -30,10 +30,12 @@ class Customer_model extends CI_Model
      * This function is used to add new customer to system
      * @return number $insert_id : This is last inserted id
      */
-    function addNewCustomer($customerInfo)
+    function addNewServer($serverInfo)
     {
         $this->db->trans_start();
-        $this->db->insert('tbl_customers', $customerInfo);
+        $this->db->insert('servers', $serverInfo);
+
+        var_dump($serverInfo);
         
         $insert_id = $this->db->insert_id();
         
@@ -47,12 +49,12 @@ class Customer_model extends CI_Model
      * @param number $userId : This is customer id
      * @return array $result : This is customer information
      */
-    function getCustomerInfo($customerId)
+    function getServerInfo($customerId)
     {
-        $this->db->select('id, fullname, email, phone, address, communication, vehicles,username,servername');
-        $this->db->from('tbl_customers');
+        $this->db->select('serverid, servername, ip_address, system_info, description');
+        $this->db->from('servers');
         $this->db->where('status', 'A');
-        $this->db->where('id', $customerId);
+        $this->db->where('serverid', $customerId);
         $query = $this->db->get();
         
         return $query->row();
@@ -63,10 +65,10 @@ class Customer_model extends CI_Model
      * @param array $customerInfo : This is customers updated information
      * @param number $customerId : This is customer id
      */
-    function editCustomer($customerInfo, $customerId)
+    function editServer($serverInfo, $serverId)
     {
-        $this->db->where('id', $customerId);
-        $this->db->update('tbl_customers', $customerInfo);
+        $this->db->where('serverid', $serverId);
+        $this->db->update('servers', $serverInfo);
         
         return TRUE;
     }
@@ -76,10 +78,10 @@ class Customer_model extends CI_Model
      * @param number $customerId : This is customer id
      * @return boolean $result : TRUE / FALSE
      */
-    function deleteCustomer($id)
+    function deleteServer($id)
     {
-		$this->db->where('id', $id);
-		$this->db->delete('tbl_customers');
+		$this->db->where('serverid', $id);
+		$this->db->delete('servers');
         
         return $this->db->affected_rows();
     }
@@ -89,12 +91,12 @@ class Customer_model extends CI_Model
      * @param number $customerId : This is customer id
      * @return array $result : This is customer information
      */
-    function getCustomerInfoById($customerId)
+    function getServerInfoById($serverId)
     {
-        $this->db->select('id, fullname, email, phone, address, communication, vehicles,username,servername');
-        $this->db->from('tbl_customers');
+        $this->db->select('serverid, servername, ip_address, system_info, description');
+        $this->db->from('servers');
         $this->db->where('status', 'A');
-        $this->db->where('id', $customerId);
+        $this->db->where('serverid', $serverId);
         $query = $this->db->get();
         
         return $query->row();

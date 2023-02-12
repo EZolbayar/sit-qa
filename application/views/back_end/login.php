@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>WorldTrack GPS | CRM System Log in</title>
+    <title>Environment SIT</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <link href="<?php echo base_url(); ?>assets/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -20,10 +20,10 @@
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="<?php echo base_url(); ?>"><b>WorldTrack GPS</b><br>CRM Control Panel</a>
+        <a href="<?php echo base_url(); ?>"><b>Environment SIT</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
-        <p class="login-box-msg"><strong>Sign In</strong></p>
+        <p class="login-box-msg"><strong>Нэвтрэх</strong></p>
         <?php $this->load->helper('form'); ?>
         <div class="row">
             <div class="col-md-12">
@@ -52,11 +52,11 @@
         <?php } ?>
         <form action="<?php echo base_url(); ?>loginMe" method="post">
           <div class="form-group has-feedback">
-            <input type="email" class="form-control" placeholder="Email" name="email" required />
+            <input type="email" class="form-control" placeholder="мэйл хаяг" name="email" required />
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="Password" name="password" required />
+            <input type="password" class="form-control" placeholder="Нууц үг" name="password" required />
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">
@@ -68,12 +68,12 @@
               </div>  -->                       
             </div><!-- /.col -->
             <div class="col-xs-4">
-              <input type="submit" class="btn btn-primary btn-block btn-flat" value="Sign In" />
+              <input type="submit" class="btn btn-primary btn-block btn-flat" value="Нэвтрэх" />
             </div><!-- /.col -->
           </div>
         </form>
 
-        <a href="<?php echo base_url() ?>forgotPassword">Forgot Password</a><br>
+        <!-- <a href="<?php echo base_url() ?>forgotPassword">Forgot Password</a><br> -->
         
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->

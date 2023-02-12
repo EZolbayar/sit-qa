@@ -1,0 +1,277 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost
+-- Generation Time: Feb 12, 2023 at 03:55 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.0.25
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `sit_env`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `instances`
+--
+
+CREATE TABLE `instances` (
+  `instanceid` bigint(20) NOT NULL,
+  `instancename` varchar(100) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `status` char(1) NOT NULL DEFAULT 'A' COMMENT 'A= Active D= Deactive'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `instances`
+--
+
+INSERT INTO `instances` (`instanceid`, `instancename`, `created_at`, `updated_at`, `status`) VALUES
+(1, 'aux', '2023-02-11 05:35:18', '2023-02-11 05:35:18', 'A'),
+(2, 'finaclesit', '2023-02-11 05:35:18', '2023-02-11 05:35:18', 'A');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `last_login`
+--
+
+CREATE TABLE `last_login` (
+  `id` bigint(20) NOT NULL,
+  `userId` bigint(20) NOT NULL,
+  `sessionData` varchar(2048) NOT NULL,
+  `machineIp` varchar(1024) NOT NULL,
+  `userAgent` varchar(128) NOT NULL,
+  `agentString` varchar(1024) NOT NULL,
+  `platform` varchar(128) NOT NULL,
+  `createdDtm` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `last_login`
+--
+
+INSERT INTO `last_login` (`id`, `userId`, `sessionData`, `machineIp`, `userAgent`, `agentString`, `platform`, `createdDtm`) VALUES
+(17, 1, '{\"role\":\"1\",\"roleText\":\"Administrator\",\"name\":\"Admin\"}', '::1', 'Chrome 109.0.0.0', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'Mac OS X', '2023-02-11 16:09:09'),
+(18, 1, '{\"role\":\"1\",\"roleText\":\"Administrator\",\"name\":\"Admin\"}', '::1', 'Chrome 109.0.0.0', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'Mac OS X', '2023-02-12 14:52:48'),
+(19, 2, '{\"role\":\"2\",\"roleText\":\"Viewers\",\"name\":\"Viewer\"}', '::1', 'Chrome 109.0.0.0', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'Mac OS X', '2023-02-12 15:50:02'),
+(20, 1, '{\"role\":\"1\",\"roleText\":\"Administrator\",\"name\":\"Admin\"}', '::1', 'Chrome 109.0.0.0', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'Mac OS X', '2023-02-12 15:50:24'),
+(21, 1, '{\"role\":\"1\",\"roleText\":\"Administrator\",\"name\":\"Admin\"}', '::1', 'Chrome 109.0.0.0', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'Mac OS X', '2023-02-12 16:26:25'),
+(22, 1, '{\"role\":\"1\",\"roleText\":\"Administrator\",\"name\":\"Admin\"}', '::1', 'Chrome 109.0.0.0', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'Mac OS X', '2023-02-12 16:28:50'),
+(23, 1, '{\"role\":\"1\",\"roleText\":\"Administrator\",\"name\":\"Admin\"}', '::1', 'Chrome 109.0.0.0', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'Mac OS X', '2023-02-12 16:29:02'),
+(24, 1, '{\"role\":\"1\",\"roleText\":\"Administrator\",\"name\":\"Admin\"}', '::1', 'Chrome 109.0.0.0', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'Mac OS X', '2023-02-12 16:29:26'),
+(25, 1, '{\"role\":\"1\",\"roleText\":\"Administrator\",\"name\":\"Admin\"}', '::1', 'Chrome 109.0.0.0', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'Mac OS X', '2023-02-12 16:35:00'),
+(26, 1, '{\"role\":\"1\",\"roleText\":\"Administrator\",\"name\":\"Admin\"}', '::1', 'Chrome 109.0.0.0', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'Mac OS X', '2023-02-12 16:38:05'),
+(27, 1, '{\"role\":\"1\",\"roleText\":\"Administrator\",\"name\":\"Admin\"}', '::1', 'Chrome 109.0.0.0', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36', 'Mac OS X', '2023-02-12 16:51:01');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reset_password`
+--
+
+CREATE TABLE `reset_password` (
+  `id` bigint(20) NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `activation_id` varchar(32) NOT NULL,
+  `agent` varchar(512) NOT NULL,
+  `client_ip` varchar(32) NOT NULL,
+  `isDeleted` tinyint(4) NOT NULL DEFAULT 0,
+  `createdBy` bigint(20) NOT NULL DEFAULT 1,
+  `createdDtm` datetime NOT NULL,
+  `updatedBy` bigint(20) DEFAULT NULL,
+  `updatedDtm` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `roleId` tinyint(4) NOT NULL COMMENT 'role id',
+  `role` varchar(50) NOT NULL COMMENT 'role text'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`roleId`, `role`) VALUES
+(1, 'Administrator'),
+(2, 'Viewers');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `serverandinstance`
+--
+
+CREATE TABLE `serverandinstance` (
+  `serverid` varchar(100) NOT NULL,
+  `instanceid` varchar(100) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `serverandinstance`
+--
+
+INSERT INTO `serverandinstance` (`serverid`, `instanceid`, `created_at`, `updated_at`) VALUES
+('1', '1', '2020-04-04 02:15:29', '2020-04-04 02:15:29'),
+('1', '2', '2020-04-04 02:15:29', '2020-04-04 02:15:29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `servers`
+--
+
+CREATE TABLE `servers` (
+  `serverid` bigint(20) NOT NULL,
+  `servername` varchar(100) DEFAULT NULL,
+  `ip_address` varchar(100) DEFAULT NULL,
+  `system_info` text NOT NULL,
+  `description` text NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `type` int(10) NOT NULL,
+  `status` char(1) NOT NULL DEFAULT 'A' COMMENT 'A= Active D= Deactive'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `servers`
+--
+
+INSERT INTO `servers` (`serverid`, `servername`, `ip_address`, `system_info`, `description`, `created_at`, `updated_at`, `type`, `status`) VALUES
+(1, 'database server', '172.25.0.113', 'OS-linux, RAM-4rb, Hard-128gb ssd ', 'Finacle and Subsystems database', '2023-02-11 05:45:29', '2023-02-11 05:45:29', 1, 'A'),
+(2, 'Windows server', '172.25.0.195', 'OS-Windows, RAM-4rb, Hard-128gb ssd ', 'Windows server', '2023-02-11 05:45:29', '2023-02-11 05:45:29', 2, 'A'),
+(3, 'BB and BPMS server', '172.25.0.109', 'OS-linux, RAM-4rb, Hard-128gb ssd ', 'BB, Camunda and BPMS', '2023-02-11 05:45:29', '2023-02-11 05:45:29', 2, 'A');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `userId` int(11) NOT NULL,
+  `email` varchar(128) NOT NULL COMMENT 'login email',
+  `password` varchar(128) NOT NULL COMMENT 'hashed login password',
+  `name` varchar(128) DEFAULT NULL COMMENT 'full name of user',
+  `mobile` varchar(20) DEFAULT NULL,
+  `roleId` tinyint(4) NOT NULL,
+  `isDeleted` tinyint(4) NOT NULL DEFAULT 0,
+  `createdBy` int(11) NOT NULL,
+  `createdDtm` datetime NOT NULL,
+  `updatedBy` int(11) DEFAULT NULL,
+  `updatedDtm` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`userId`, `email`, `password`, `name`, `mobile`, `roleId`, `isDeleted`, `createdBy`, `createdDtm`, `updatedBy`, `updatedDtm`) VALUES
+(1, 'admin@example.com', '1Xacbank!', 'Admin', '99999999', 1, 0, 0, '2023-02-03 15:56:49', 1, '2023-02-03 15:56:49'),
+(2, 'viewer@example.com', '1Xacbank!', 'Viewer', '88888888', 2, 0, 1, '2023-02-03 15:56:49', 1, '2023-02-03 15:56:49');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `instances`
+--
+ALTER TABLE `instances`
+  ADD PRIMARY KEY (`instanceid`);
+
+--
+-- Indexes for table `last_login`
+--
+ALTER TABLE `last_login`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `reset_password`
+--
+ALTER TABLE `reset_password`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`roleId`);
+
+--
+-- Indexes for table `servers`
+--
+ALTER TABLE `servers`
+  ADD PRIMARY KEY (`serverid`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`userId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `instances`
+--
+ALTER TABLE `instances`
+  MODIFY `instanceid` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+
+--
+-- AUTO_INCREMENT for table `last_login`
+--
+ALTER TABLE `last_login`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `reset_password`
+--
+ALTER TABLE `reset_password`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `roleId` tinyint(4) NOT NULL AUTO_INCREMENT COMMENT 'role id', AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `servers`
+--
+ALTER TABLE `servers`
+  MODIFY `serverid` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

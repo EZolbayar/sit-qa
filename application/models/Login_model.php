@@ -17,17 +17,21 @@ class Login_model extends CI_Model
      */
     function loginMe($email, $password)
     {
-        $this->db->select('BaseTbl.userId, BaseTbl.password, BaseTbl.name, BaseTbl.roleId, Roles.role');
-        $this->db->from('tbl_users as BaseTbl');
-        $this->db->join('tbl_roles as Roles','Roles.roleId = BaseTbl.roleId');
-        $this->db->where('BaseTbl.email', $email);
-        $this->db->where('BaseTbl.isDeleted', 0);
+        $this->db->select('u.userId, u.password, u.name, u.roleId, r.role');
+        $this->db->from('users as u');
+        $this->db->join('roles as r','r.roleId = u.roleId');
+        $this->db->where('u.email', $email);
+        $this->db->where('u.isDeleted', 0);
         $query = $this->db->get();
         
         $user = $query->row();
         
+
+        //verifyHashedPassword($password, $user->password)
+        
         if(!empty($user)){
-            if(verifyHashedPassword($password, $user->password)){
+            if($password == $user->password){
+
                 return $user;
             } else {
                 return array();
@@ -47,7 +51,7 @@ class Login_model extends CI_Model
         $this->db->select('userId');
         $this->db->where('email', $email);
         $this->db->where('isDeleted', 0);
-        $query = $this->db->get('tbl_users');
+        $query = $this->db->get('users');
 
         if ($query->num_rows() > 0){
             return true;
@@ -64,7 +68,7 @@ class Login_model extends CI_Model
      */
     function resetPasswordUser($data)
     {
-        $result = $this->db->insert('tbl_reset_password', $data);
+        $result = $this->db->insert('reset_password', $data);
 
         if($result) {
             return TRUE;
@@ -81,7 +85,7 @@ class Login_model extends CI_Model
     function getCustomerInfoByEmail($email)
     {
         $this->db->select('userId, email, name');
-        $this->db->from('tbl_users');
+        $this->db->from('users');
         $this->db->where('isDeleted', 0);
         $this->db->where('email', $email);
         $query = $this->db->get();
@@ -97,7 +101,7 @@ class Login_model extends CI_Model
     function checkActivationDetails($email, $activation_id)
     {
         $this->db->select('id');
-        $this->db->from('tbl_reset_password');
+        $this->db->from('reset_password');
         $this->db->where('email', $email);
         $this->db->where('activation_id', $activation_id);
         $query = $this->db->get();
@@ -109,8 +113,8 @@ class Login_model extends CI_Model
     {
         $this->db->where('email', $email);
         $this->db->where('isDeleted', 0);
-        $this->db->update('tbl_users', array('password'=>getHashedPassword($password)));
-        $this->db->delete('tbl_reset_password', array('email'=>$email));
+        $this->db->update('users', array('password'=>getHashedPassword($password)));
+        $this->db->delete('reset_password', array('email'=>$email));
     }
 
     /**
@@ -120,7 +124,7 @@ class Login_model extends CI_Model
     function lastLogin($loginInfo)
     {
         $this->db->trans_start();
-        $this->db->insert('tbl_last_login', $loginInfo);
+        $this->db->insert('last_login', $loginInfo);
         $this->db->trans_complete();
     }
 
@@ -131,11 +135,11 @@ class Login_model extends CI_Model
      */
     function lastLoginInfo($userId)
     {
-        $this->db->select('BaseTbl.createdDtm');
-        $this->db->where('BaseTbl.userId', $userId);
-        $this->db->order_by('BaseTbl.id', 'DESC');
+        $this->db->select('ll.createdDtm');
+        $this->db->where('ll.userId', $userId);
+        $this->db->order_by('ll.id', 'DESC');
         $this->db->limit(1);
-        $query = $this->db->get('tbl_last_login as BaseTbl');
+        $query = $this->db->get('last_login as ll');
 		
         return $query->row();
     }

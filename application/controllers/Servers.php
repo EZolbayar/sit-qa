@@ -9,7 +9,7 @@ require APPPATH . '/libraries/BaseController.php';
  * @version : 1.1
  * @since : 15 November 2019
  */
-class Customers extends BaseController
+class Servers extends BaseController
 {
     /**
      * This is default constructor of the class
@@ -17,7 +17,7 @@ class Customers extends BaseController
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('customer_model');
+        $this->load->model('server_model');
         $this->isLoggedIn();   
     }
     
@@ -26,7 +26,7 @@ class Customers extends BaseController
      */
     public function index()
     { 
-        $this->global['pageTitle'] = 'WorldTrack GPS : Dashboard';
+        $this->global['pageTitle'] = 'Environment SIT : Dashboard';
         
         $this->loadViews("back_end/dashboard", $this->global, NULL , NULL);
     }
@@ -34,7 +34,7 @@ class Customers extends BaseController
     /**
      * This function is used to load the Customers list
      */
-    function customerListing()
+    function serverListing()
     {
         if($this->isAdmin() == TRUE)
         {
@@ -45,18 +45,18 @@ class Customers extends BaseController
 			
 			$this->global['searchBody'] = 'Yes';
 			
-            $data['customerRecords'] = $this->customer_model->customerListing();
+            $data['serverRecords'] = $this->server_model->serverListing();
 			
-            $this->global['pageTitle'] = 'WorldTrack GPS : Customer Listing';
+            $this->global['pageTitle'] = 'Environment SIT : Server Listing';
             
-            $this->loadViews("back_end/customers/customers", $this->global, $data, NULL);
+            $this->loadViews("back_end/servers/servers", $this->global, $data, NULL);
         }
     }
 
     /**
      * This function is used to load the add new form
      */
-    function addNewCust()
+    function addNewServ()
     {
         if($this->isAdmin() == TRUE)
         {
@@ -64,12 +64,12 @@ class Customers extends BaseController
         }
         else
         {
-            $this->load->model('customer_model');
+            $this->load->model('server_model');
             $data = "";
 			
-            $this->global['pageTitle'] = 'WorldTrack GPS : Add New Customer';
+            $this->global['pageTitle'] = 'Environment SIT : Add New Server';
 
-            $this->loadViews("back_end/customers/addCustomer", $this->global, $data, NULL);
+            $this->loadViews("back_end/servers/addServer", $this->global, $data, NULL);
         }
     }
 
@@ -77,7 +77,7 @@ class Customers extends BaseController
     /**
      * This function is used to add new Customer to the system
      */
-    function addNewCustomer()
+    function addNewServer()
     {
         if($this->isAdmin() == TRUE)
         {
@@ -87,40 +87,42 @@ class Customers extends BaseController
         {
             $this->load->library('form_validation');
             
-            $this->form_validation->set_rules('fname','Full Name','trim|required|max_length[128]');
-			$this->form_validation->set_rules('vehicles','Associate Vehicle(s)','trim|required');
+            $this->form_validation->set_rules('sname','Server Name','trim|required|max_length[128]');
+			$this->form_validation->set_rules('ipaddress','IP Address','trim|required');
+            $this->form_validation->set_rules('type','Type','trim|required');
 			
             if($this->form_validation->run() == FALSE)
             {
-                $this->addNewCust();
+                $this->addNewServ();
             }
             else
             {   //pre($_POST); die;
-                $name = $this->security->xss_clean($this->input->post('fname'));
-                $email = strtolower($this->security->xss_clean($this->input->post('email')));
-                $mobile = $this->security->xss_clean($this->input->post('mobile'));
-				$vehicles = $this->security->xss_clean($this->input->post('vehicles'));
-				$username = $this->security->xss_clean($this->input->post('username'));
-				$servername = $this->security->xss_clean($this->input->post('servername'));
-				$communication = $this->security->xss_clean($this->input->post('communication'));
-				$address = $this->security->xss_clean($this->input->post('address'));
+                $servername = $this->security->xss_clean($this->input->post('sname'));
+                $ipaddress = $this->security->xss_clean($this->input->post('ipaddress'));
+				$systeminfo = $this->security->xss_clean($this->input->post('systeminfo'));
+				$desc = $this->security->xss_clean($this->input->post('desc'));
+                $type = $this->security->xss_clean($this->input->post('type'));
+				
                 
-                $customerInfo = array('fullname'=> $name, 'email'=>$email,
-                                    'phone'=>$mobile, 'vehicles'=> $vehicles, 'username'=> $username, 'servername'=> $servername, 'communication'=> $communication, 'address'=> $address, 'created_at'=>date('Y-m-d H:i:s'));
+                $serverInfo = array('servername'=> $servername, 'ipaddress'=>$ipaddress,
+                                    'systeminfo'=>$systeminfo, 'description'=> $desc, 'created_at'=>date('Y-m-d H:i:s'), 'type'=>$type);
                 
-                $this->load->model('customer_model');
-                $result = $this->customer_model->addNewCustomer($customerInfo);
+                var_dump($serverInfo);
+                $this->load->model('server_model');
+                $result = $this->server_model->addNewServer($serverInfo);
+
+                var_dump($result);
                 
                 if($result > 0)
                 {
-                    $this->session->set_flashdata('success', 'New Customer created successfully');
+                    $this->session->set_flashdata('success', 'New Server created successfully');
                 }
                 else
                 {
-                    $this->session->set_flashdata('error', 'Customer creation failed');
+                    $this->session->set_flashdata('error', 'Server creation failed');
                 }
                 
-                redirect('addNewCust');
+                redirect('addNewServ');
             }
         }
     }
@@ -130,25 +132,25 @@ class Customers extends BaseController
      * This function is used load Customer edit information
      * @param number $customersId : Optional : This is customer id
      */
-    function modifyCustomer($customerId = NULL)
+    function modifyServer($serverId = NULL)
     {
-        if($this->isAdmin() == TRUE || $customerId == 1)
+        if($this->isAdmin() == TRUE || $serverId == 1)
         {
             $this->loadThis();
         }
         else
         {
-            if($customerId == null)
+            if($serverId == null)
             {
                 redirect('customerListing');
             }
-            $data['customerInfo'] = $this->customer_model->getCustomerInfo($customerId);
+            $data['customerInfo'] = $this->server_model->getCustomerInfo($serverId);
 			//$str = $this->db->last_query();
             //echo "<pre>";  print_r($str);
 			//exit;
-            $this->global['pageTitle'] = 'WorldTrack GPS : Edit Customer';
+            $this->global['pageTitle'] = 'Environment SIT : Edit Server';
             
-            $this->loadViews("back_end/customers/modifyCustomer", $this->global, $data, NULL);
+            $this->loadViews("back_end/servers/modifyServer", $this->global, $data, NULL);
         }
     }
     
@@ -158,24 +160,24 @@ class Customers extends BaseController
      * This function is used load customer view information
      * @param number $customerId : Optional : This is customer id
      */
-    function viewCustomer($customerId = NULL)
+    function viewServer($serverId = NULL)
     {
-        if($this->isAdmin() == TRUE || $customerId == 1)
+        if($this->isAdmin() == TRUE || $serverId == 1)
         {
             $this->loadThis();
         }
         else
         {
-            if($customerId == null)
+            if($serverId == null)
             {
-                redirect('customerListing');
+                redirect('serverListing');
             }
             
-            $data['customerInfo'] = $this->customer_model->getCustomerInfoById($customerId);
+            $data['serverInfo'] = $this->server_model->getServerInfoById($serverId);
             
-            $this->global['pageTitle'] = 'WorldTrack GPS : View Customer';
+            $this->global['pageTitle'] = 'Environment SIT : View Server';
             
-            $this->loadViews("back_end/customers/viewCustomer", $this->global, $data, NULL);
+            $this->loadViews("back_end/servers/viewServer", $this->global, $data, NULL);
         }
     }
     
@@ -183,7 +185,7 @@ class Customers extends BaseController
     /**
      * This function is used to edit the Customer information
      */
-    function editCustomer()
+    function editServer()
     {
         if($this->isAdmin() == TRUE)
         {
@@ -193,14 +195,14 @@ class Customers extends BaseController
         {
             $this->load->library('form_validation');
             
-            $customerId = $this->input->post('customerId');
+            $serverId = $this->input->post('serverId');
             
             $this->form_validation->set_rules('fname','Full Name','trim|required|max_length[128]');
 			$this->form_validation->set_rules('vehicles','Associate Vehicles','trim|required');
 				  
             if($this->form_validation->run() == FALSE)
             {
-                $this->modifyCustomer($customerId);
+                $this->modifyServer($serverId);
             }
             else
             {
@@ -213,27 +215,27 @@ class Customers extends BaseController
 				$communication = $this->security->xss_clean($this->input->post('communication'));
 				$address = $this->security->xss_clean($this->input->post('address'));
                 
-                $customerInfo = array();
+                $serverInfo = array();
                 
                 if($name)
                 {
                     									
-				$customerInfo = array('fullname'=> $name, 'email'=>$email, 'phone'=>$mobile, 'vehicles'=> $vehicles, 'username'=> $username, 'servername'=> $servername, 'communication'=> $communication, 'address'=> $address, 'updated_at'=>date('Y-m-d H:i:s'));
+				$serverInfo = array('fullname'=> $name, 'email'=>$email, 'phone'=>$mobile, 'vehicles'=> $vehicles, 'username'=> $username, 'servername'=> $servername, 'communication'=> $communication, 'address'=> $address, 'updated_at'=>date('Y-m-d H:i:s'));
                 }
                
                 
-                $result = $this->customer_model->editCustomer($customerInfo, $customerId);
+                $result = $this->server_model->editServer($serverInfo, $serverId);
                 
                 if($result == true)
                 {
-                    $this->session->set_flashdata('success', 'Customer updated successfully');
+                    $this->session->set_flashdata('success', 'Server updated successfully');
                 }
                 else
                 {
-                    $this->session->set_flashdata('error', 'Customer updation failed');
+                    $this->session->set_flashdata('error', 'Server updation failed');
                 }
                 
-                redirect('customers/modifyCustomer/'.$customerId.'');
+                redirect('servers/modifyServer/'.$serverId.'');
             }
         }
     }
@@ -243,7 +245,7 @@ class Customers extends BaseController
      * This function is used to delete the Customer using customerId
      * @return boolean $result : TRUE / FALSE
      */
-    function deleteCustomer()
+    function deleteServer()
     {
         if($this->isAdmin() == TRUE)
         {
@@ -253,7 +255,7 @@ class Customers extends BaseController
         {
             $id = $this->input->post('id');
             
-            $result = $this->customer_model->deleteCustomer($id);
+            $result = $this->server_model->deleteServer($id);
             //$str = $this->db->last_query();
             //echo "<pre>";  print_r($str);
 			//exit;
