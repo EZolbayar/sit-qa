@@ -14,26 +14,26 @@
               <!-- small box -->
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>26</h3>
-                  <p>Total Expired Vehicle(s)</p>
+                  <h3>10</h3>
+                  <p>Servers</p>
                 </div>
                 <div class="icon">
-                  <i class="fa fa-car"></i>
+                  <i class="fa fa-server"></i>
                 </div>
-                <a href="<?php echo base_url(); ?>vehicleExpired" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="<?php echo base_url(); ?>serverListing" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>2390</h3>
-                  <p>Total Vehicle(s)</p>
+                  <h3>26</h3>
+                  <p>Subsystems</p>
                 </div>
                 <div class="icon">
-                  <i class="fa fa-cab"></i>
+                  <i class="fa fa-desktop"></i>
                 </div>
-                <a href="<?php echo base_url(); ?>vehicleListing" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="<?php echo base_url(); ?>subSystemListing" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-3 col-xs-6">
@@ -41,30 +41,31 @@
               <div class="small-box bg-yellow">
                 <div class="inner">
                   <h3>1230</h3>
-                  <p>Total Customer(s)</p>
+                  <p>Databases</p>
                 </div>
                 <div class="icon">
-                  <i class="fa fa-user"></i>
+                  <i class="fa fa-database"></i>
                 </div>
-                <a href="<?php echo base_url(); ?>customerListing" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="<?php echo base_url(); ?>databaseListing" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
             <div class="col-lg-3 col-xs-6">
               <!-- small box -->
               <div class="small-box bg-red">
                 <div class="inner">
-                  <h3>65</h3>
-                  <p>Total Month Renewal(s)</p>
+                  <h3>10</h3>
+                  <p>OS</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-pie-graph"></i>
+                  <i class="fa fa-windows"></i>
                 </div>
                 <a href="<?php echo base_url(); ?>vehicleRenewal" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
           </div>
 		  <div class="card-header card">
-                     <h3 class="card-title"><i class="fa fa-table"></i>&nbsp;List of <?php if(date("M")=="Jan") { $month=1;  } 
+        <h3>List of Servers</h3>
+                     <!-- <h3 class="card-title"><i class="fa fa-table"></i>&nbsp;List of <?php if(date("M")=="Jan") { $month=1;  } 
 																						 elseif(date("M")=="Feb") { $month=2; } 
 																						 elseif(date("M")=="Mar") { $month=3; }
 																						 elseif(date("M")=="Apr") { $month=4; }
@@ -80,7 +81,7 @@
 					 																	$month_num =$month; 
 																						$month_name = date("F", mktime(0, 0, 0, $month_num, 10)); 
 																						echo $month_name."\n"; ?> 
- 																		Month Renewal Vehicle(s) </h3>
+ 																		Month </h3> -->
                 </div>
 				<div class="card">
             
@@ -101,9 +102,9 @@
 				
 				
 				 <?php 
-                    if(!empty($customerRecords))
+                    if(!empty($serverRecords))
                     { $i=1;
-                        foreach($customerRecords as $record)
+                        foreach($serverRecords as $record)
                         {
                     ?>
 					

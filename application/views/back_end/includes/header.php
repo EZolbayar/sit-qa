@@ -187,18 +187,25 @@
             </li>
 
             <li class="treeview">
-              <a href="#"><span><i class="fa fa-car"></i>&nbsp;&nbsp;Manage Vehicles</span></a>
+              <a href="#"><span><i class="fa fa-database"></i>&nbsp;&nbsp;Manage Databases</span></a>
               <ul class="treeview-menu icon">
-                <li><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;<a href="<?php echo base_url(); ?>vehicleListing">Vehicles Listing</a></li>
-                <li><a href="<?php echo base_url(); ?>addNewVehicle">Add Vehicle</a></li>
+                <li><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;<a href="<?php echo base_url(); ?>databaseListing">Database Listing</a></li>
+                <li><a href="<?php echo base_url(); ?>addNewDatabase">Add Database</a></li>
               </ul>
             </li>
 
             <li class="treeview">
-              <a href="#"><span><i class="fa fa-files-o"></i>&nbsp;&nbsp;Manage Reports</span></a>
+              <a href="#"><span><i class="fa fa-desktop"></i>&nbsp;&nbsp;Manage Subsystems</span></a>
               <ul class="treeview-menu icon">
-                <li><a href="<?php echo base_url(); ?>reportListing">Reports Listing</a></li>
-                <li><a href="<?php echo base_url(); ?>invoiceListing">Manage Invoices</a></li>
+                <li><a href="<?php echo base_url(); ?>subsystemListing">Subsystems Listing</a></li>
+                <!-- <li><a href="<?php echo base_url(); ?>invoiceListing">Manage Invoices</a></li> -->
+              </ul>
+            </li>
+            <li class="treeview">
+              <a href="#"><span><i class="fa fa-microchip"></i>&nbsp;&nbsp;OS Access</span></a>
+              <ul class="treeview-menu icon">
+                <li><a href="<?php echo base_url(); ?>ostListing">OS Access Listing</a></li>
+                <li><a href="<?php echo base_url(); ?>addOS">Add OS Access</a></li>
               </ul>
             </li>
             <li>

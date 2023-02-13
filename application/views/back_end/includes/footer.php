@@ -2,7 +2,7 @@
 	<div class="pull-right hidden-xs">
 		<b>Environment SIT</b> | Version 1.0
 	</div>
-	<strong>Copyright &copy; <?php echo date("Y"); ?> <a href="<?php echo base_url(); ?>">Environment SIT</a>.</strong> All rights reserved.
+	<strong>Copyright &copy; <?php echo date("Y"); ?> <a href="<?php echo base_url(); ?>">Environment SIT</a></strong>
 </footer>
 
 <script src="<?php echo base_url(); ?>assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

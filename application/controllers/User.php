@@ -26,10 +26,10 @@ class User extends BaseController
      */
     public function index()
     {
-        $this->global['pageTitle'] = 'WorldTrack GPS : Dashboard';
+        $this->global['pageTitle'] = 'Environment SIT : Dashboard';
 		
 		$data['searchBody'] = 'Yes';
-		$data['customerRecords'] = $this->user_model->serverListing();
+		$data['serverRecords'] = $this->user_model->serverListing();
         
         $this->loadViews("back_end/dashboard", $this->global, $data , NULL);
     }
@@ -56,7 +56,7 @@ class User extends BaseController
             
             $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
             
-            $this->global['pageTitle'] = 'WorldTrack GPS : User Listing';
+            $this->global['pageTitle'] = 'Environment SIT : User Listing';
             
             $this->loadViews("back_end/users", $this->global, $data, NULL);
         }
@@ -76,7 +76,7 @@ class User extends BaseController
             $this->load->model('user_model');
             $data['roles'] = $this->user_model->getUserRoles();
             
-            $this->global['pageTitle'] = 'WorldTrack GPS : Add New User';
+            $this->global['pageTitle'] = 'Environment SIT : Add New User';
 
             $this->loadViews("back_end/addNew", $this->global, $data, NULL);
         }
@@ -174,7 +174,7 @@ class User extends BaseController
             $data['roles'] = $this->user_model->getUserRoles();
             $data['userInfo'] = $this->user_model->getUserInfo($userId);
             
-            $this->global['pageTitle'] = 'WorldTrack GPS : Edit User';
+            $this->global['pageTitle'] = 'Environment SIT : Edit User';
             
             $this->loadViews("back_end/modifyUser", $this->global, $data, NULL);
         }
@@ -273,7 +273,7 @@ class User extends BaseController
      */
     function pageNotFound()
     {
-        $this->global['pageTitle'] = 'WorldTrack GPS : 404 - Page Not Found';
+        $this->global['pageTitle'] = 'Environment SIT : 404 - Page Not Found';
         
         $this->loadViews("back_end/404", $this->global, NULL, NULL);
     }
@@ -310,7 +310,7 @@ class User extends BaseController
 
             $data['userRecords'] = $this->user_model->loginHistory($userId, $searchText, $fromDate, $toDate, $returns["page"], $returns["segment"]);
             
-            $this->global['pageTitle'] = 'WorldTrack GPS : User Login History';
+            $this->global['pageTitle'] = 'Environment SIT : User Login History';
             
             $this->loadViews("back_end/loginHistory", $this->global, $data, NULL);
         }        
@@ -324,7 +324,7 @@ class User extends BaseController
         $data["userInfo"] = $this->user_model->getUserInfoWithRole($this->vendorId);
         $data["active"] = $active;
         
-        $this->global['pageTitle'] = $active == "details" ? 'WorldTrack GPS : My Profile' : 'WorldTrack GPS : Change Password';
+        $this->global['pageTitle'] = $active == "details" ? 'Environment SIT : My Profile' : 'Environment SIT : Change Password';
         $this->loadViews("back_end/profile", $this->global, $data, NULL);
     }
 
