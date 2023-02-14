@@ -66,6 +66,7 @@ class Servers extends BaseController
         {
             $this->load->model('server_model');
             $data = "";
+            $this->global['add_servers'] = $this->server_model->getServerType();
 			
             $this->global['pageTitle'] = 'Environment SIT : Add New Server';
 
@@ -107,11 +108,11 @@ class Servers extends BaseController
                 $serverInfo = array('servername'=> $servername, 'ip_address'=>$ipaddress,
                                     'system_info'=>$systeminfo, 'description'=> $desc, 'created_at'=>date('Y-m-d H:i:s'), 'type'=>$type);
                 
-                var_dump($serverInfo);
+              
                 $this->load->model('server_model');
                 $result = $this->server_model->addNewServer($serverInfo);
 
-                var_dump($result);
+              
                 
                 if($result > 0)
                 {

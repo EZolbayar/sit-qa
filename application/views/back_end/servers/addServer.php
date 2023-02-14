@@ -64,11 +64,25 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                            <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="type">Type&nbsp;<span class="error">*</span></label>
-                                        <input type="text" class="form-control" id="type" placeholder="Enter Type" value="<?php echo set_value('type'); ?>" name="type" maxlength="128">
+                                        <label for="cid">Type /1 = db server, 2 = App server/&nbsp;<span class="error">*</span></label>
+                                        <select class="form-control required" id="type" name="type">
+                                            <option value="0">Select Type</option>
+                                            <?php
+                                            if (!empty($add_servers)) {
+                                                foreach ($add_servers as $type) {
+                                            ?>
+                                                    <option value="<?php echo $type->type ?>" <?php if ($type->type == set_value('type')) {
+                                                                                                    echo "selected=selected";
+                                                                                                } ?>><?php echo $type->type ?></option>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
+
                                 </div>
                             
                             </div>

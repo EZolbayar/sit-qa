@@ -92,7 +92,7 @@ class Login extends CI_Controller
             }
             else
             {
-                $this->session->set_flashdata('error', 'Email or password mismatch');
+                $this->session->set_flashdata('error', 'мэйл эсвэл нууц үг буруу байна');
                 
                 $this->index();
             }

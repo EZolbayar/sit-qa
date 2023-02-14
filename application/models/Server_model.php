@@ -114,4 +114,16 @@ class Server_model extends CI_Model
         $user = $query->row();
     }
 
+    function getServerType()
+    {
+        $this->db->select('type');
+        $this->db->from('servers');
+        $this->db->group_by('type');
+        $query = $this->db->get();
+
+        var_dump($query->result());
+
+        return $query->result();
+    }
+
 }  
