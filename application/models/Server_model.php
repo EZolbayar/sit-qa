@@ -3,9 +3,9 @@
 /**
  * Class : Customer (Customer Model)
  * Customer model class to get to handle user related data 
- * @author : Rajesh Gupta
- * @version : 1.1
- * @since : 15 November 2019
+ * @author : Zolbayar
+ * @version : 1.0
+ * @since : 08 FEB 2023
  */
 class Server_model extends CI_Model
 {

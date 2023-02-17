@@ -1,11 +1,11 @@
 <?php defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' ); 
 
 /**
- * Class : BaseController
- * Base Class to control over all the classes
- * @author : Rajesh Gupta
- * @version : 1.1
- * @since : 15 November 2019
+ * Class : Customer (Customer Model)
+ * Customer model class to get to handle user related data 
+ * @author : Zolbayar
+ * @version : 1.0
+ * @since : 08 FEB 2023
  */
 class BaseController extends CI_Controller {
 	protected $role = '';
