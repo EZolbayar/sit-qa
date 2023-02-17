@@ -378,7 +378,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-SELECT db.name, s.ip_address, i.instancename, db.username, db.password FROM sit_env.databases db
-INNER JOIN instances i ON db.instanceid = i.instanceid
-INNER JOIN serverandinstance si ON i.instanceid = si.instanceid
-INNER JOIN servers s ON si.serverid = s.serverid;

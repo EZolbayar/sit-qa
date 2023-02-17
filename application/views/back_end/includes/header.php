@@ -172,7 +172,7 @@
                 <i class="fa fa-upload"></i>
                 <span>Task Uploads</span>
               </a>
-            </li>-->
+            </li> -->
           <?php
           }
           if ($role == ROLE_ADMIN) {
@@ -189,6 +189,20 @@
             <li class="treeview">
               <a href="#"><span><i class="fa fa-database"></i>&nbsp;&nbsp;Manage Databases</span></a>
               <ul class="treeview-menu icon">
+
+                <?php
+                if(!empty($instanceName)){
+                  var_dump($instanceName);
+                  foreach($instanceName as $name){
+                    var_dump($instanceName);
+                    print('aaaa');
+                ?>    
+                <li><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;<a href ="<?php echo $name->instancename ?>"></a></li>
+                <?php    
+                  }
+                }
+                ?>
+
                 <li><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;<a href="<?php echo base_url(); ?>databaseListing">Database Listing</a></li>
                 <li><a href="<?php echo base_url(); ?>addNewDatabase">Add Database</a></li>
               </ul>

@@ -84,17 +84,17 @@ $route['editServer'] = "servers/editServer";
 $route['deleteServer'] = "servers/deleteServer";
 $route['addNewServ'] = "servers/addNewServ";
 
-//Vehicles Module
+//Database Module
 
-$route['vehicleListing'] = 'vehicles/vehicleListing';
-$route['vehicleListing/(:num)'] = "vehicles/VehicleListing/$1";
-$route['addNewVehicle'] = "vehicles/addNewVehicle";
-$route['modifyVehicle'] = "vehicles/modifyVehicle";
-$route['viewVehicle/(:num)'] = "vehicles/viewVehicle/$1";
-$route['modifyVehicle/(:num)'] = "vehicles/modifyVehicle/$1";
-$route['editVehicle'] = "vehicles/editVehicle";
-$route['deleteVehicle'] = "vehicles/deleteVehicle";
-$route['addNewVehi'] = "vehicles/addNewVehi";
+$route['databaseListing'] = 'databases/databaseListing';
+$route['databaseListing/(:num)'] = "databases/DatabaseListing/$1";
+$route['addNewDatabase'] = "databases/addNewDatabase";
+$route['modifyDatabase'] = "databases/modifyDatabase";
+$route['viewDatabase/(:num)'] = "databases/viewDatabase/$1";
+$route['modifyDatabase/(:num)'] = "databases/modifyDatabase/$1";
+$route['editDatabase'] = "databases/editDatabase";
+$route['deleteDatabase'] = "databases/deleteDatabase";
+$route['addNewDb'] = "databases/addNewDb";
 //-------------------
 
 $route['loadChangePass'] = "user/loadChangePass";

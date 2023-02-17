@@ -64,6 +64,7 @@ class Login extends CI_Controller
             $password = $this->input->post('password');
             
             $result = $this->login_model->loginMe($email, $password);
+            var_dump($result);
             
             if(!empty($result))
             {

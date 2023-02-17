@@ -18,6 +18,7 @@ class User extends BaseController
     {
         parent::__construct();
         $this->load->model('user_model');
+        //$this->load->model('database_model');
         $this->isLoggedIn();   
     }
     
@@ -26,11 +27,13 @@ class User extends BaseController
      */
     public function index()
     {
+        $this->load->model('database_model');
         $this->global['pageTitle'] = 'Environment SIT : Dashboard';
 		
 		$data['searchBody'] = 'Yes';
 		$data['serverRecords'] = $this->user_model->serverListing();
-        
+       // $data['instanceName'] = $this->database_model->getInstanceName();
+            
         $this->loadViews("back_end/dashboard", $this->global, $data , NULL);
     }
     

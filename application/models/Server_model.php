@@ -34,8 +34,6 @@ class Server_model extends CI_Model
     {
         $this->db->trans_start();
         $this->db->insert('servers', $serverInfo);
-
-        var_dump($serverInfo);
         
         $insert_id = $this->db->insert_id();
         
@@ -112,6 +110,7 @@ class Server_model extends CI_Model
         $query = $this->db->get();
         
         $user = $query->row();
+        
     }
 
     function getServerType()
@@ -120,8 +119,6 @@ class Server_model extends CI_Model
         $this->db->from('servers');
         $this->db->group_by('type');
         $query = $this->db->get();
-
-        var_dump($query->result());
 
         return $query->result();
     }

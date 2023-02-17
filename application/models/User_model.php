@@ -44,6 +44,7 @@ class User_model extends CI_Model
         $this->db->select('u.userId, u.email, u.name, u.mobile, u.createdDtm, r.role');
         $this->db->from('users as u');
         $this->db->join('roles as r', 'r.roleId = u.roleId','left');
+       
         if(!empty($searchText)) {
             $likeCriteria = "(u.email  LIKE '%".$searchText."%'
                             OR  u.name  LIKE '%".$searchText."%'
@@ -56,7 +57,8 @@ class User_model extends CI_Model
         $this->db->limit($page, $segment);
         $query = $this->db->get();
         
-        $result = $query->result();        
+        $result = $query->result();
+        
         return $result;
     }
   
