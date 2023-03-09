@@ -3,26 +3,27 @@
 /**
  * Class : Customer (Customer Model)
  * Customer model class to get to handle user related data 
- * @author : Zolbayar
- * @version : 1.0
- * @since : 08 FEB 2023
+ * @author : Rajesh Gupta
+ * @version : 1.1
+ * @since : 15 November 2019
  */
-class Server_model extends CI_Model
+class SshAccess_model extends CI_Model
 {
     
 	   /**
      * This function is used to get the customer listing 
      * @return array $result : This is result
      */
-    function serverListing()
+    function sshAccessListing()
     {
-        $this->db->select('s.serverid, s.servername, s.ip_address, s.server_info, s.description');
-        $this->db->from('servers as s');
-        $this->db->where('s.status', 'A');
-        $this->db->order_by('s.serverid', 'ASC');
+        $this->db->select('a.id, a.name, a.username, a.password, s.ip_address, a.description');
+        $this->db->from('access as a');
+        $this->db->join('servers as s', 'a.serverid = s.serverid','inner');
+        $this->db->join('instances as i', 'a.instanceid = i.instanceid','inner');
+        $this->db->where('a.type', '2');
+        $this->db->order_by('a.id', 'DESC');
         $query = $this->db->get();
-        
-        $result = $query->result();        
+        $result = $query->result();    
         return $result;
     }
         
@@ -30,10 +31,10 @@ class Server_model extends CI_Model
      * This function is used to add new customer to system
      * @return number $insert_id : This is last inserted id
      */
-    function addNewServer($serverInfo)
+    function addNewSshAccess($customerInfo)
     {
         $this->db->trans_start();
-        $this->db->insert('servers', $serverInfo);
+        $this->db->insert('tbl_customers', $customerInfo);
         
         $insert_id = $this->db->insert_id();
         
@@ -47,12 +48,12 @@ class Server_model extends CI_Model
      * @param number $userId : This is customer id
      * @return array $result : This is customer information
      */
-    function getServerInfo($serverId)
+    function getSshAccessInfo($sshAccessId)
     {
-        $this->db->select('serverid, servername, ip_address, server_info, description');
-        $this->db->from('servers');
+        $this->db->select('id, fullname, email, phone, address, communication, vehicles,username,servername');
+        $this->db->from('tbl_customers');
         $this->db->where('status', 'A');
-        $this->db->where('serverid', $serverId);
+        $this->db->where('id', $sshAccessId);
         $query = $this->db->get();
         
         return $query->row();
@@ -63,10 +64,10 @@ class Server_model extends CI_Model
      * @param array $customerInfo : This is customers updated information
      * @param number $customerId : This is customer id
      */
-    function editServer($serverInfo, $serverId)
+    function editSshAccess($sshAccessInfo, $sshAccessId)
     {
-        $this->db->where('serverid', $serverId);
-        $this->db->update('servers', $serverInfo);
+        $this->db->where('id', $sshAccessId);
+        $this->db->update('tbl_customers', $sshAccessInfo);
         
         return TRUE;
     }
@@ -76,13 +77,11 @@ class Server_model extends CI_Model
      * @param number $customerId : This is customer id
      * @return boolean $result : TRUE / FALSE
      */
-    function deleteServer($serverId)
+    function deleteCustomer($id)
     {
-		$this->db->where('serverid', $serverId);
-		$this->db->delete('servers');
+		$this->db->where('id', $id);
+		$this->db->delete('tbl_customers');
         
-        var_dump($this->db->affected_rows());
-
         return $this->db->affected_rows();
     }
 
@@ -91,38 +90,15 @@ class Server_model extends CI_Model
      * @param number $customerId : This is customer id
      * @return array $result : This is customer information
      */
-    function getServerInfoById($serverId)
+    function getCustomerInfoById($customerId)
     {
-        $this->db->select('serverid, servername, ip_address, server_info, description');
-        $this->db->from('servers');
+        $this->db->select('id, fullname, email, phone, address, communication, vehicles,username,servername');
+        $this->db->from('tbl_customers');
         $this->db->where('status', 'A');
-        $this->db->where('serverid', $serverId);
+        $this->db->where('id', $customerId);
         $query = $this->db->get();
         
         return $query->row();
-    }
-
-    function getInstace()
-    {
-        $this->db->select('');
-        $this->db->from('servers as s');
-        $this->db->join(' as r','r.roleId = u.roleId');
-        $this->db->where('u.email', $email);
-        $this->db->where('u.isDeleted', 0);
-        $query = $this->db->get();
-        
-        $user = $query->row();
-        
-    }
-
-    function getServerType()
-    {
-        $this->db->select('type');
-        $this->db->from('servers');
-        $this->db->group_by('type');
-        $query = $this->db->get();
-
-        return $query->result();
     }
 
 }  

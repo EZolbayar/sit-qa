@@ -69,7 +69,7 @@ class User_model extends CI_Model
   
   function serverListing()
     {
-        $this->db->select('s.serverid, s.servername, s.ip_address, s.system_info, s.description');
+        $this->db->select('s.serverid, s.servername, s.ip_address, s.server_info, s.description');
         $this->db->from('servers as s');
         $this->db->where('s.status', 'A');
         $this->db->order_by('s.serverid', 'ASC');
@@ -173,7 +173,7 @@ class User_model extends CI_Model
     function deleteUser($userId, $userInfo)
     {
         $this->db->where('userId', $userId);
-        $this->db->update('users', $userInfo);
+        $this->db->delete('users', $userInfo);
         
         return $this->db->affected_rows();
     }

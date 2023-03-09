@@ -2,8 +2,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <i class="fa fa-users"></i> Customer Management
-        <small>Edit Customer Informations</small>
+        <i class="fa fa-users"></i> Сервер тохиргоо
+        <small>Засах</small>
       </h1>
     </section>
     
@@ -15,30 +15,30 @@
               <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header">
-                        <div class="row"> <div class="col-md-6"><h3 class="box-title">Enter Customer Details</h3></div>  <div class="col-md-6"><a class="btn btn-sm btn-primary" href="<?php echo base_url().'customerListing' ?>" title="Back to Customers List"><i class="fa fa-backward"></i></a></div> </div>
+                        <div class="row"> <div class="col-md-6"><h3 class="box-title">Сервер Дэлгэрэнгүй</h3></div>  <div class="col-md-6"><a class="btn btn-sm btn-primary" href="<?php echo base_url().'serverListing' ?>" title="Back to Servers List"><i class="fa fa-backward"></i></a></div> </div>
                     </div><!-- /.box-header -->
                     <!-- form start -->
                     
-                    <form role="form" action="<?php echo base_url() ?>editCustomer" method="post" id="editCustomer">
+                    <form role="form" action="<?php echo base_url() ?>editServer" method="post" id="editServer">
                         <div class="box-body">
 						<div class="row"><div class="col-md-12">     
 						<div class="text-center">
-    			<span aria-hidden="true" class="error">*</span>&nbsp;Required field
+    			<span aria-hidden="true" class="error">*</span>&nbsp;Заавал
   			</div></div>
 						</div>
                             <div class="row">
                                 <div class="col-md-6">                                
                                     <div class="form-group">
-                                        <label for="fname">Full Name&nbsp;<span class="error">*</span></label>
-								<input type="text" class="form-control required" id="fname" placeholder="Enter Full Name" name="fname" value="<?php echo $customerInfo->fullname; ?>" maxlength="128">
-								<input type="hidden" value="<?php echo $customerInfo->id; ?>" name="customerId" id="customerId" />    
+                                        <label for="fname">&nbsp;<span class="error">*</span>Нэр</label>
+								<input type="text" class="form-control required" id="servername" placeholder="Нэр" name="servername" value="<?php echo $serverInfo->servername; ?>" maxlength="128">
+								<input type="hidden" value="<?php echo $serverInfo->serverid; ?>" name="serverId" id="serverId" />    
                                     </div>
                                     
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="email">Email Address</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Enter Email" name="email" value="<?php echo $customerInfo->email; ?>" maxlength="128">
+                                        <label for="email">IP хаяг</label>
+                                        <input type="text" class="form-control" id="ip_address" placeholder="IP хаяг" name="ip_address" value="<?php echo $serverInfo->ip_address; ?>" maxlength="128">
                                     </div>
                                 </div>
                             </div>
@@ -46,53 +46,23 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="mobile">Contact Number</label>
-                                        <input type="text" class="form-control" id="mobile" placeholder="Contact Number" name="mobile" value="<?php echo $customerInfo->phone; ?>" maxlength="20">
+                                        <label for="mobile">Үзүүлэлт</label>
+                                        <input type="text" class="form-control" id="server_info" placeholder="Үзүүлэлт" name="server_info" value="<?php echo $serverInfo->server_info; ?>" maxlength="20">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="username">User Name</label>
-										<input type="username" class="form-control" id="username" placeholder="Enter User Name" name="username" value="<?php echo $customerInfo->username; ?>" maxlength="100">
+                                        <label for="username">Дэлгэрэнгүй</label>
+										<input type="username" class="form-control" id="description" placeholder="Дэлгэрэнгүй" name="description" value="<?php echo $serverInfo->description; ?>" maxlength="100">
                                     </div>
                                 </div>
-                            </div>
-							
-							<div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="servername">Server Name</label>
-                                        <input type="servername" class="form-control" id="servername" placeholder="Enter Server Name" name="servername" value="<?php echo $customerInfo->servername; ?>" maxlength="100">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="vehicles">Associate Vehicle(s)&nbsp;<span class="error">*</span></label>
-										<textarea name="vehicles" id="vehicles" class="form-control required" cols="6" rows="2" placeholder="Enter Associate Vehicles(s)"> <?php echo $customerInfo->vehicles; ?></textarea>
-                                    </div>
-                                </div>
-                            </div>
-							
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="communication">Ongoing Communication(s)</label>
-                                        <textarea name="communication" class="form-control" cols="6" rows="2" placeholder="Enter Ongoing Communications(s)"> <?php echo $customerInfo->communication; ?></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="address">Address</label>
-                                        <textarea name="address" cols="6" rows="2" class="form-control" placeholder="Enter Address"> <?php echo $customerInfo->address; ?></textarea>
-                                    </div>
-                                </div>    
                             </div>
 							
                         </div><!-- /.box-body -->
     
                         <div class="box-footer">
-                            <input type="submit" class="btn btn-primary" value="Submit" />&nbsp;&nbsp;
-                            <input type="reset" class="btn btn-default" value="Reset" />
+                            <input type="submit" class="btn btn-primary" value="Хадгалах" />&nbsp;&nbsp;
+                            <input type="reset" class="btn btn-default" value="Цэвэрлэх" />
                         </div>
                     </form>
                 </div>
@@ -130,4 +100,4 @@
     </section>
 </div>
 
-<script src="<?php echo base_url(); ?>assets/js/editCustomer.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>assets/js/editServer.js" type="text/javascript"></script>

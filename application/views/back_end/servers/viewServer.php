@@ -2,8 +2,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-cab"></i> Server Management
-            <small>View Server Informations</small>
+            <i class="fa fa-cab"></i> Сервер
+            <small>Серверийн мэдээлэл харах</small>
         </h1>
     </section>
 
@@ -17,7 +17,7 @@
                     <div class="box-header">
                         <div class="row">
                             <div class="col-md-6">
-                                <h3 class="box-title">View Server Details</h3>
+                                <h3 class="box-title">Серверийн мэдээлэл харах</h3>
                             </div>
                             <div class="col-md-6">
                                 <a class="btn btn-sm btn-primary" href="<?php echo base_url() . 'serverListing' ?>" title="Back to Server List">
@@ -31,7 +31,7 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    <label for="mobile">Serverid: </label>
+                                    <label for="mobile">Сервер №: </label>
                                 </div>
                             </div>
                             <div class="col-md-5">
@@ -44,7 +44,7 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    <label for="mobile">Server Name: </label>
+                                    <label for="mobile">Серверийн нэр: </label>
                                 </div>
                             </div>
                             <div class="col-md-5">
@@ -61,7 +61,7 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    <label for="mobile">IP Address: </label>
+                                    <label for="mobile">IP Хаяг: </label>
                                 </div>
                             </div>
                             <div class="col-md-5">
@@ -78,13 +78,13 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    <label for="mobile">System Information: </label>
+                                    <label for="mobile">Үзүүлэлт: </label>
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    <?php if ($serverInfo->system_info) {
-                                        echo $serverInfo->system_info;
+                                    <?php if ($serverInfo->server_info) {
+                                        echo $serverInfo->server_info;
                                     } else {
                                         echo 'N/A';
                                     }  ?>
@@ -95,7 +95,7 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    <label for="mobile">Description: </label>
+                                    <label for="mobile">Дэлгэрэнгүй: </label>
                                 </div>
                             </div>
                             <div class="col-md-5">

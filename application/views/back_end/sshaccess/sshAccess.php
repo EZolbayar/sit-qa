@@ -2,15 +2,15 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <i class="fa fa-cab"></i> Database мэдээлэл
-        <small>Database тохиргоо  Нэмэх/Засах/Устгах</small>
+        <i class="fa fa-users"></i> SSH Access Management
+        <small>SSH Access Control for Add/Edit/Delete Module</small>
       </h1>
     </section>
     <section class="content">
         <div class="row">
             <div class="col-xs-12 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addNewVehicle"><i class="fa fa-plus"></i> Нэмэх</a>
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addNewSshAccess"><i class="fa fa-plus"></i> Add New SSH Access</a>
                 </div>
             </div>
         </div>
@@ -18,34 +18,33 @@
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
-                    <h3>Жагсаалт</h3>
+                    <h3>List of SSH Access</h3>
                    
                 </div><!-- /.box-header -->
 				<div>&nbsp;<div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>№</th>
-                  <th>Нэр</th>
-                  <th>Схем</th>
-                  <th>Нууц үг</th>
-				  <th>IP хаяг</th>
-                  <th>Дэлгэрэнгүй</th>
-                  <th>Үйлдэл</th>
+                <th>№</th>
+                  <th>Name</th>
+                  <th>Username</th>
+                  <th>Password</th>
+				  <th>IP address</th>
+                  <th>Description</th>
                 </tr>
                 </thead>
                 <tbody>
 				
 				
 				 <?php 
-                    if(!empty($databaseRecords))
+                    if(!empty($sshAccessRecords))
                     { $i=1;
-                        foreach($databaseRecords as $record)
+                        foreach($sshAccessRecords as $record)
                         {
                     ?>
 					
                 <tr>
-                  <td><?php echo $i;?>.</td>
+                    <td><?php echo $i;?>.</td>
                   <td><?php echo $record->name; ?></td>
                   <td><?php if($record->username) { echo $record->username; } else { echo 'N/A';}?></td>
                   <td data-title = "Password"> &nbsp;&nbsp;
@@ -53,14 +52,13 @@
                     <button type = "button" id="" class = "btn btn-sm btn-primary" name = "dynamic"><i class="fa fa-eye" aria-hidden="true"></i></button>
                   
                     </td>
-				  <td> <?php if($record->ip) { echo $record->ip; } else { echo 'N/A';}?></td>
-                  <!-- <td> <?php if($record->instancename) { echo $record->instancename; } else { echo 'N/A';}?></td> -->
+				  <td> <?php if($record->ip_address) { echo $record->ip_address; } else { echo 'N/A';}?></td>
 				  <td> <?php if($record->description) { echo $record->description; } else { echo 'N/A';}?></td>
                    <td class="text-center">
-                           <a class="btn btn-sm btn-primary" href="<?php echo base_url().'viewDatabase/'.$record->id; ?>" title="View"><i class="fa fa-info" aria-hidden="true"></i></i></a>&nbsp;
-                            <a class="btn btn-sm btn-info" href="<?php echo base_url().'modifyDatabase/'.$record->id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;
+                           <a class="btn btn-sm btn-primary" href="<?php echo base_url().'viewSshAccess/'.$record->id; ?>" title="View"><i class="fa fa-history"></i></a>&nbsp;
+                            <a class="btn btn-sm btn-info" href="<?php echo base_url().'modifySshAccess/'.$record->id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;
                             						
-							<a class="btn btn-sm btn-danger deleteDatabase" href="#" data-id="<?php echo $record->id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
+							<a class="btn btn-sm btn-danger deleteSshAccess" href="#" data-id="<?php echo $record->id; ?>" title="Delete"><i class="fa fa-trash"></i></a>
 							
                         </td>
                 </tr>
@@ -83,32 +81,31 @@
 <script type="text/javascript">
     jQuery(document).ready(function(){
         jQuery('ul.pagination li a').click(function (e) {
-            e.preventDefault();     
-            console.log(e.preventDefault());       
+            e.preventDefault();            
             var link = jQuery(this).get(0).href;            
             var value = link.substring(link.lastIndexOf('/') + 1);
-            jQuery("#searchList").attr("action", baseURL + "databaseListing/" + value);
+            jQuery("#searchList").attr("action", baseURL + "customerListing/" + value);
             jQuery("#searchList").submit();
         });
     });
 </script>
 <script>
-    var myButton = document.getElementsByName('dynamic');
-    var myInput = document.getElementsByName('viewPass');
-    myButton.forEach(function(element, index){
-    element.onclick = function(){
-        'use strict';
+var myButton = document.getElementsByName('dynamic');
+var myInput = document.getElementsByName('viewPass');
+myButton.forEach(function(element, index){
+  element.onclick = function(){
+     'use strict';
 
-        if (myInput[index].type == 'password') {
-            myInput[index].setAttribute('type', 'text');
-            element.firstChild.textContent = '';
-            element.firstChild.className = "fa fa-eye-slash";
+      if (myInput[index].type == 'password') {
+          myInput[index].setAttribute('type', 'text');
+          element.firstChild.textContent = '';
+          element.firstChild.className = "fa fa-eye-slash";
 
-        } else {
-            myInput[index].setAttribute('type', 'password');
-            element.firstChild.textContent = '';
-                element.firstChild.className = "fa fa-eye";
-        }
-    }
-    })
+      } else {
+           myInput[index].setAttribute('type', 'password');
+           element.firstChild.textContent = '';
+            element.firstChild.className = "fa fa-eye";
+      }
+  }
+})
 </script>

@@ -16,13 +16,15 @@ class Database_model extends CI_Model
      */
     function databaseListing()
     {
-        $this->db->select('BaseTbl.id, BaseTbl.cid, BaseTbl.ownername, BaseTbl.vehiclenumber, BaseTbl.erpportalusername, BaseTbl.gpskitmobilenumber, BaseTbl.created_at');
-        $this->db->from('tbl_vehicles as BaseTbl');
-        $this->db->where('BaseTbl.status', 'A');
-        $this->db->order_by('BaseTbl.id', 'DESC');
+        $this->db->select('a.id, a.name, a.username, a.password,  CONCAT(s.ip_address, "/", i.instancename) AS ip, a.description');
+        $this->db->from('access as a');
+        $this->db->join('servers as s', 'a.serverid = s.serverid','inner');
+        $this->db->join('instances as i', 'a.instanceid = i.instanceid','inner');
+        $this->db->where('a.type', '1');
+        $this->db->order_by('a.id', 'DESC');
         $query = $this->db->get();
         
-        $result = $query->result();        
+        $result = $query->result();    
         return $result;
     }
         
@@ -49,7 +51,7 @@ class Database_model extends CI_Model
      */
     function getDatabaseInfo($databaseId)
     {
-        $this->db->from('tbl_vehicles');
+        $this->db->from('access');
         $this->db->where('status', 'A');
         $this->db->where('id', $databaseId);
         $query = $this->db->get();
@@ -65,7 +67,7 @@ class Database_model extends CI_Model
     function editDatabase($databaseInfo, $databaseId)
     {
         $this->db->where('id', $databaseId);
-        $this->db->update('tbl_vehicles', $databaseInfo);
+        $this->db->update('access', $databaseInfo);
         
         return TRUE;
     }
@@ -90,10 +92,20 @@ class Database_model extends CI_Model
      */
     function getDatabaseInfoById($databaseId)
     {
-        $this->db->from('tbl_vehicles');
-        $this->db->where('status', 'A');
+
+        $this->db->select('a.id, a.name, a.username, a.password,  CONCAT(s.ip_address, "/", i.instancename) AS ip, a.description');
+        $this->db->from('access as a');
+        $this->db->join('servers as s', 'a.serverid = s.serverid','inner');
+        $this->db->join('instances as i', 'a.instanceid = i.instanceid','inner');
+        $this->db->where('a.type', '1');
         $this->db->where('id', $databaseId);
+        
         $query = $this->db->get();
+
+        // $this->db->from('access');
+        // $this->db->where('status', 'A');
+        // $this->db->where('id', $databaseId);
+        // $query = $this->db->get();
         
         return $query->row();
     }
@@ -104,13 +116,15 @@ class Database_model extends CI_Model
      * @param number $cid : This is customer id
      * @return array $result : This is Customer information
      */
-    function getServerInfoById($cId)
+    function getServerInfoById($dbId)
     {
         $this->db->select('id, fullname');
         $this->db->from('tbl_customers');
         $this->db->where('status', 'A');
-        $this->db->where('id', $cId);
+        $this->db->where('id', $dbId);
         $query = $this->db->get();
+
+        var_dump($query);
         
         return $query->row();
     }

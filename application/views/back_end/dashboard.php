@@ -112,7 +112,7 @@
                   <td><?php echo $i;?></td>
                   <td><?php echo $record->servername; ?></td>
                   <td><?php echo $record->ip_address; ?></td>
-                  <td> <?php if($record->system_info) { echo $record->system_info; } else { echo 'N/A';}?></td>
+                  <td> <?php if($record->server_info) { echo $record->server_info; } else { echo 'N/A';}?></td>
 				          <td> <?php if($record->description) { echo $record->description; } else { echo 'N/A';}?></td>
                   <td><a class="btn btn-sm btn-primary" href="<?php echo base_url().'viewServer/'.$record->serverid; ?>" title="View"><i class="fa fa-history"></i></a></td>
                 </tr>

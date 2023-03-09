@@ -46,7 +46,7 @@ class Databases extends BaseController
 			
 			$this->global['searchBody'] = 'Yes';
 			
-            $data['databaseRecords'] = $this->vehicle_model->vehicleListing();
+            $data['databaseRecords'] = $this->database_model->databaseListing();
             $this->global['pageTitle'] = 'Environment SIT : Database Listing';
             
             $this->loadViews("back_end/databases/databases", $this->global, $data, NULL);

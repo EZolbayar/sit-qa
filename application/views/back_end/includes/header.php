@@ -216,12 +216,19 @@
               </ul>
             </li>
             <li class="treeview">
-              <a href="#"><span><i class="fa fa-microchip"></i>&nbsp;&nbsp;OS Access</span></a>
+              <a href="#"><span><i class="fa fa-microchip"></i>&nbsp;&nbsp;SSH Access</span></a>
               <ul class="treeview-menu icon">
-                <li><a href="<?php echo base_url(); ?>ostListing">OS Access Listing</a></li>
-                <li><a href="<?php echo base_url(); ?>addOS">Add OS Access</a></li>
+                <li><a href="<?php echo base_url(); ?>sshAccessListing">SSH access Listing</a></li>
+                <li><a href="<?php echo base_url(); ?>addSshAccess">Add SSH Access</a></li>
               </ul>
             </li>
+            <!-- <li class="treeview">
+              <a href="#"><span><i class="fa fa-microchip"></i>&nbsp;&nbsp;Deploy</span></a>
+              <ul class="treeview-menu icon">
+                <li><a href="<?php echo base_url(); ?>sshAccessListing">SSH access Listing</a></li>
+                <li><a href="<?php echo base_url(); ?>addSshAccess">Add SSH Access</a></li>
+              </ul>
+            </li> -->
             <li>
               <a href="<?php echo base_url(); ?>userListing">
                 <i class="fa fa-users"></i>

@@ -2,8 +2,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-server"></i> Server Management
-            <small>Add New Server</small>
+            <i class="fa fa-server"></i> Серверийн тохиргоо
+            <small>Сервер нэмэх</small>
         </h1>
     </section>
 
@@ -17,7 +17,7 @@
                     <div class="box-header">
                         <div class="row">
                             <div class="col-md-6">
-                                <h3 class="box-title">Enter Server Details</h3>
+                                <h3 class="box-title">Дэлгэрэнгүй</h3>
                             </div>
                             <div class="col-md-6"><a class="btn btn-sm btn-primary" href="<?php echo base_url() . 'serverListing' ?>" title="Back to Servers List"><i class="fa fa-backward"></i></a></div>
                         </div>
@@ -29,21 +29,21 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="text-center">
-                                        <span aria-hidden="true" class="error">*</span>&nbsp;Required field
+                                        <span aria-hidden="true" class="error">*</span>&nbsp;Заавал
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="sname">Server Name&nbsp;<span class="error">*</span></label>
+                                        <label for="sname">Серверийн нэр&nbsp;<span class="error">*</span></label>
                                         <input type="text" class="form-control required" placeholder="Enter Server Name" value="<?php echo set_value('sname'); ?>" id="sname" name="sname" maxlength="128">
                                     </div>
 
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="ipaddress">IP Address&nbsp;<span class="error">*</span></label>
+                                        <label for="ipaddress">IP Хаяг&nbsp;<span class="error">*</span></label>
                                         <input type="text" class="form-control" id="ipaddress" placeholder="Enter IP Address" value="<?php echo set_value('ipaddress'); ?>" name="ipaddress" maxlength="128">
                                     </div>
                                 </div>
@@ -52,13 +52,13 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="systeminfo">Systemm Information</label>
+                                        <label for="systeminfo">Үзүүлэлт</label>
                                         <textarea name="systeminfo" class="form-control" cols="6" rows="2" placeholder="Enter Information"> <?php echo set_value('systeminfo'); ?></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="desc">Description</label>
+                                        <label for="desc">Дэлгэрэнгүй</label>
                                         <textarea name="desc" cols="6" rows="2" class="form-control" placeholder="Enter Description"> <?php echo set_value('desc'); ?></textarea>
                                     </div>
                                 </div>
@@ -66,9 +66,9 @@
                             <div class="row">
                             <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="cid">Type /1 = db server, 2 = App server/&nbsp;<span class="error">*</span></label>
+                                        <label for="cid">Төрөл /1 = db server, 2 = App server/&nbsp;<span class="error">*</span></label>
                                         <select class="form-control required" id="type" name="type">
-                                            <option value="0">Select Type</option>
+                                            <option value="0">Төрөл сонгох</option>
                                             <?php
                                             if (!empty($add_servers)) {
                                                 foreach ($add_servers as $type) {
@@ -89,8 +89,8 @@
                         </div><!-- /.box-body -->
 
                         <div class="box-footer">
-                            <input type="submit" class="btn btn-primary" value="Submit" />&nbsp;&nbsp;
-                            <input type="reset" class="btn btn-default" value="Reset" />
+                            <input type="submit" class="btn btn-primary" value="Хадгалах" />&nbsp;&nbsp;
+                            <input type="reset" class="btn btn-default" value="Цэвэрлэх" />
                         </div>
                     </form>
                 </div>

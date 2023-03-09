@@ -95,6 +95,31 @@ $route['modifyDatabase/(:num)'] = "databases/modifyDatabase/$1";
 $route['editDatabase'] = "databases/editDatabase";
 $route['deleteDatabase'] = "databases/deleteDatabase";
 $route['addNewDb'] = "databases/addNewDb";
+
+//SubSystems Module
+
+$route['subsystemListing'] = 'subsystems/subsystemListing';
+$route['subsystemListing/(:num)'] = "subsystems/SubSystemListing/$1";
+$route['addNewSubSystem'] = "subsystems/addNewSubSystem";
+$route['modifySubSystem'] = "subsystems/modifySubSystem";
+$route['viewSubSystem/(:num)'] = "subsystems/viewSubSystem/$1";
+$route['modifySubSystem/(:num)'] = "subsystems/modifySubSystem/$1";
+$route['editSubSystem'] = "subsystems/editSubSystem";
+$route['deleteSubSystem'] = "subsystems/deleteSubSystem";
+$route['addNewSub'] = "subsystems/addNewSub";
+
+//SSH Access Module
+
+$route['sshAccessListing'] = 'sshAccess/sshAccessListing';
+$route['sshAccessListing/(:num)'] = "sshAccess/SshAccessListing/$1";
+$route['addNewSshAccess'] = "sshAccess/addNewSshAccess";
+$route['modifySshAccess'] = "sshAccess/modifySshAccess";
+$route['viewSshAccess/(:num)'] = "sshAccess/viewSshAccess/$1";
+$route['modifySshAccess/(:num)'] = "sshAccess/modifySshAccess/$1";
+$route['editSshAccess'] = "sshAccess/editSshAccess";
+$route['deleteSshAccess'] = "sshAccess/deleteSshAccess";
+$route['addNewSsh'] = "sshAccess/addNewSsh";
+
 //-------------------
 
 $route['loadChangePass'] = "user/loadChangePass";

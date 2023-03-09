@@ -106,7 +106,7 @@ class Servers extends BaseController
 				
                 
                 $serverInfo = array('servername'=> $servername, 'ip_address'=>$ipaddress,
-                                    'system_info'=>$systeminfo, 'description'=> $desc, 'created_at'=>date('Y-m-d H:i:s'), 'type'=>$type);
+                                    'server_info'=>$systeminfo, 'description'=> $desc, 'created_at'=>date('Y-m-d H:i:s'), 'type'=>$type);
                 
               
                 $this->load->model('server_model');
@@ -135,7 +135,7 @@ class Servers extends BaseController
      */
     function modifyServer($serverId = NULL)
     {
-        if($this->isAdmin() == TRUE || $serverId == 1)
+        if($this->isAdmin() == TRUE)
         {
             $this->loadThis();
         }
@@ -143,9 +143,9 @@ class Servers extends BaseController
         {
             if($serverId == null)
             {
-                redirect('customerListing');
+                redirect('serverListing');
             }
-            $data['customerInfo'] = $this->server_model->getCustomerInfo($serverId);
+            $data['serverInfo'] = $this->server_model->getServerInfo($serverId);
 			//$str = $this->db->last_query();
             //echo "<pre>";  print_r($str);
 			//exit;
@@ -163,7 +163,7 @@ class Servers extends BaseController
      */
     function viewServer($serverId = NULL)
     {
-        if($this->isAdmin() == TRUE || $serverId == 1)
+        if($this->isAdmin() == TRUE)
         {
             $this->loadThis();
         }
@@ -197,9 +197,10 @@ class Servers extends BaseController
             $this->load->library('form_validation');
             
             $serverId = $this->input->post('serverId');
+            var_dump($serverId);
             
-            $this->form_validation->set_rules('fname','Full Name','trim|required|max_length[128]');
-			$this->form_validation->set_rules('vehicles','Associate Vehicles','trim|required');
+            $this->form_validation->set_rules('servername','Full Name','trim|required|max_length[128]');
+			//$this->form_validation->set_rules('vehicles','Associate Vehicles','trim|required');
 				  
             if($this->form_validation->run() == FALSE)
             {
@@ -207,28 +208,28 @@ class Servers extends BaseController
             }
             else
             {
-                $name = $this->security->xss_clean($this->input->post('fname'));
-                $email = strtolower($this->security->xss_clean($this->input->post('email')));
-                $mobile = $this->security->xss_clean($this->input->post('mobile'));
-				$vehicles = $this->security->xss_clean($this->input->post('vehicles'));
-				$username = $this->security->xss_clean($this->input->post('username'));
-				$servername = $this->security->xss_clean($this->input->post('servername'));
-				$communication = $this->security->xss_clean($this->input->post('communication'));
-				$address = $this->security->xss_clean($this->input->post('address'));
                 
+                $servername = $this->security->xss_clean($this->input->post('servername'));
+                $ipaddress = $this->security->xss_clean($this->input->post('ip_address'));
+                $serverInfo = $this->security->xss_clean($this->input->post('server_info'));
+				$description = $this->security->xss_clean($this->input->post('description'));
+			
                 $serverInfo = array();
                 
-                if($name)
+                if($servername)
                 {
                     									
-				$serverInfo = array('fullname'=> $name, 'email'=>$email, 'phone'=>$mobile, 'vehicles'=> $vehicles, 'username'=> $username, 'servername'=> $servername, 'communication'=> $communication, 'address'=> $address, 'updated_at'=>date('Y-m-d H:i:s'));
+				$serverInfo = array('servername'=> $servername, 'ip_address'=>$ipaddress, 'server_info'=>$serverInfo, 'description'=> $description, 'updated_at'=>date('Y-m-d H:i:s'));
+                var_dump($serverInfo);
                 }
                
                 
                 $result = $this->server_model->editServer($serverInfo, $serverId);
+                var_dump($result);
                 
                 if($result == true)
                 {
+                    var_dump($result);
                     $this->session->set_flashdata('success', 'Server updated successfully');
                 }
                 else
@@ -254,12 +255,13 @@ class Servers extends BaseController
         }
         else
         {
-            $id = $this->input->post('id');
+            $serverId = $this->input->post('id');
             
-            $result = $this->server_model->deleteServer($id);
-            //$str = $this->db->last_query();
-            //echo "<pre>";  print_r($str);
-			//exit;
+            $result = $this->server_model->deleteServer($serverId);
+            
+            // $str = $this->db->last_query();
+            // echo "<pre>";  print_r($str);
+			// exit;
             if ($result > 0) { echo(json_encode(array('status'=>TRUE))); }
             else { echo(json_encode(array('status'=>FALSE))); }
         }
