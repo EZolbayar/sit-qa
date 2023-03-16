@@ -16,7 +16,7 @@ class Subsystem_model extends CI_Model
      */
     function subsystemListing(){
 
-        $this->db->select('ss.id, ss.name, ss.link, ss.description,s.ip_address, CONCAT(se.ip_address, "/", i.instancename) as db, ss.schema', FALSE);
+        $this->db->select('ss.id, ss.name, ss.link, s.description,s.ip_address, CONCAT(se.ip_address, "/", i.instancename) as db, ss.schema, ss.file_log', FALSE);
         $this->db->from('subsystems as ss');
         $this->db->join('servers as s', 'ss.appserverid = s.serverid', 'inner');
         $this->db->join('servers as se', 'ss.dbserverid = se.serverid', 'inner');
@@ -139,6 +139,16 @@ class Subsystem_model extends CI_Model
 		$this->db->order_by('instancename', 'ASC');
         $query = $this->db->get();
         var_dump($query->result());
+        return $query->result();
+    }
+
+    function getSystemCount()
+    {
+        $this->db->select('count(1) as count');
+        $this->db->from('subsystems');
+        $this->db->where('status', 'A');
+        $query = $this->db->get();
+        
         return $query->result();
     }
 }  

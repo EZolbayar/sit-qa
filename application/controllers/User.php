@@ -28,12 +28,24 @@ class User extends BaseController
     public function index()
     {
         $this->load->model('database_model');
+        $this->load->model('server_model');
+        $this->load->model('subsystem_model');
+        $this->load->model('sshAccess_model');
         $this->global['pageTitle'] = 'Environment SIT : Dashboard';
+       
 		
 		$data['searchBody'] = 'Yes';
-		$data['serverRecords'] = $this->user_model->serverListing();
+        $data['serverCount'] = $this->server_model->getServerCount();
+        $data['dbCount'] = $this->database_model->getDatabaseCount();
+        $data['systemCount'] = $this->subsystem_model->getSystemCount();
+        $data['appserverCount'] = $this->sshAccess_model->getAppServerCount();
+        $data['serverRecords'] = $this->user_model->serverListing();
+        
        // $data['instanceName'] = $this->database_model->getInstanceName();
             
+        // echo '<pre>';
+        // var_dump($data);
+        // echo '<pre>';
         $this->loadViews("back_end/dashboard", $this->global, $data , NULL);
     }
     
@@ -49,17 +61,28 @@ class User extends BaseController
         else
         {        
             $searchText = $this->security->xss_clean($this->input->post('searchText'));
+            //var_dump($searchText);
             $data['searchText'] = $searchText;
             
             $this->load->library('pagination');
             
             $count = $this->user_model->userListingCount($searchText);
+            //var_dump($count);
 
-			$returns = $this->paginationCompress ( "userListing/", $count, 10 );
-            
+			$returns = $this->paginationCompress( "userListing/", $count, 10);
+            echo '<pre>';
+            var_dump($returns);
+            echo '</pre>';
+
             $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
-            
+            echo '<pre>';
+            var_dump($data['userRecords']);
+            echo '</pre>';
             $this->global['pageTitle'] = 'Environment SIT : User Listing';
+
+            // echo '<pre>';
+            // var_dump($data);
+            // echo '<pre>';
             
             $this->loadViews("back_end/users", $this->global, $data, NULL);
         }

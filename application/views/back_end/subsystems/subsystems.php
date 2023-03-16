@@ -27,11 +27,13 @@
                 <tr>
                   <th>№</th>
                   <th>Нэр</th>
-                  <th>Хаяг</th>
+                  <th>Линк</th>
                   <th>Дэлгэрэнгүй</th>
 				  <th>Апп сервер</th>
                   <th>Database</th>
                   <th>Schema</th>
+                  <th>Лог харах зам</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -48,10 +50,11 @@
                   <td><?php echo $i;?>.</td>
                   <td><?php echo $record->name; ?></td>
                   <td><a target ="blank" href="<?php echo $record->link; ?>"><?php if($record->link) { echo $record->link; } else { echo 'N/A';}?></a></td>
-                  <td> <?php if($record->description) { echo $record->description; } else { echo 'N/A';}?></td>
+                  <td> <?php if($record->description) { echo substr($record->description, 0, 20); } else { echo 'N/A';}?></td>
 				  <td> <?php if($record->ip_address) { echo $record->ip_address; } else { echo 'N/A';}?></td>
                   <td> <?php if($record->db) { echo $record->db; } else { echo 'N/A';}?></td>
                   <td> <?php if($record->schema) { echo $record->schema; } else { echo 'N/A';}?></td>
+                  <td> <?php if($record->file_log) { echo $record->file_log; } else { echo 'N/A';}?></td>
                    <td class="text-center">
                            <a class="btn btn-sm btn-primary" href="<?php echo base_url().'viewSubSystem/'.$record->id; ?>" title="View"><i class="fa fa-history"></i></a>&nbsp;
                             <a class="btn btn-sm btn-info" href="<?php echo base_url().'modifySubSystem/'.$record->id; ?>" title="Edit"><i class="fa fa-pencil"></i></a>&nbsp;

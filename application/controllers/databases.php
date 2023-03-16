@@ -66,10 +66,12 @@ class Databases extends BaseController
         {
             $this->load->model('database_model');
 			$data = "";
-			$this->global['add_customers'] = $this->vehicle_model->getCustomersName();
+			//$this->global['add_databases'] = $this->database_model->getDatabasesName();
+            $this->global['add_servers'] = $this->database_model->getServerName();
+            $this->global['add_instances'] = $this->database_model->getInstanceName();
             
 			
-            $this->global['pageTitle'] = 'WorldTrack GPS : Add New Vehicle';
+            $this->global['pageTitle'] = 'WorldTrack GPS : Add New Database';
 
             $this->loadViews("back_end/databases/addDatabase", $this->global, $data, NULL);
         }
@@ -90,46 +92,37 @@ class Databases extends BaseController
 		
             $this->load->library('form_validation');
             
-            $this->form_validation->set_rules('cid','Customer Name','trim|required|numeric');
-            $this->form_validation->set_rules('vehiclemake','Vehicle Make','trim|required');
-			$this->form_validation->set_rules('vehiclemodel','Vehicle Model','trim|required');
-			$this->form_validation->set_rules('vehicleregistrationnumber','Vehicle Registration Number','trim|required');
-			$this->form_validation->set_rules('vehiclenumber','Vehicle Number','trim|required');
-			$this->form_validation->set_rules('gpskitinstalldate','GPS Kit Install Date','trim|required');
-			$this->form_validation->set_rules('eminumber','EMI Number','trim|required');
-			$this->form_validation->set_rules('gpskitmobilenumber','GPS Kit Mobile Number','trim|required');
-			$this->form_validation->set_rules('erpportalassociation','ERP Portal Association','trim|required');
-			$this->form_validation->set_rules('erpportalusername','ERP Portal Username','trim|required');
-			
+            $this->form_validation->set_rules('name','Нэр оруулна уу','trim|required');
+            $this->form_validation->set_rules('username','username оруулна уу','trim|required');
+			$this->form_validation->set_rules('password','Нууц үг оруулна уу','trim|required');
+			$this->form_validation->set_rules('type','Төрөл сонгоно уу','trim|required');
+			$this->form_validation->set_rules('serverid','Сервэр сонгоно уу','trim|required');
+			$this->form_validation->set_rules('instanceid','instance сонгоно уу','trim|required');
+			$this->form_validation->set_rules('status','Статус оруулна уу','trim|required');
+
             if($this->form_validation->run() == FALSE)
             {
                 $this->addNewDb();
             }
             else
             {   
-                $cid = $this->security->xss_clean($this->input->post('cid'));
-                $vehiclemake = $this->security->xss_clean($this->input->post('vehiclemake'));
-                $vehiclemodel = $this->security->xss_clean($this->input->post('vehiclemodel'));
-				$vehiclemadeyear = $this->security->xss_clean($this->input->post('vehiclemadeyear'));
-				$vehicleregistrationnumber = $this->security->xss_clean($this->input->post('vehicleregistrationnumber'));
-				$vehiclenumber = $this->security->xss_clean($this->input->post('vehiclenumber'));
-				$ownername = ucwords(strtolower($this->security->xss_clean($this->input->post('ownername'))));
-				$gpskitinstalldate = $this->security->xss_clean($this->input->post('gpskitinstalldate'));
-				$eminumber = $this->security->xss_clean($this->input->post('eminumber'));
-				$gpskitmobilenumber = $this->security->xss_clean($this->input->post('gpskitmobilenumber'));
-				$gpsdevicemodelnumber = $this->security->xss_clean($this->input->post('gpsdevicemodelnumber'));
-				$erpportalassociation = $this->security->xss_clean($this->input->post('erpportalassociation'));
-				$erpportalusername = $this->security->xss_clean($this->input->post('erpportalusername'));
-				$nextrenewaldate = $this->security->xss_clean($this->input->post('nextrenewaldate'));
-				$installbystaff = ucwords(strtolower($this->security->xss_clean($this->input->post('installbystaff'))));
-				$communication = $this->security->xss_clean($this->input->post('communication'));
-				$address = $this->security->xss_clean($this->input->post('address'));
-                
-				
-                $databaseInfo = array('cid'=> $cid, 'vehiclemake'=>$vehiclemake, 'vehiclemodel'=>$vehiclemodel, 'vehiclemadeyear'=> $vehiclemadeyear, 'vehicleregistrationnumber'=> $vehicleregistrationnumber, 'vehiclenumber'=> $vehiclenumber, 'ownername'=> $ownername, 'gpskitinstalldate'=> $gpskitinstalldate, 'eminumber'=> $eminumber, 'gpskitmobilenumber'=> $gpskitmobilenumber, 'gpsdevicemodelnumber'=> $gpsdevicemodelnumber, 'erpportalassociation'=> $erpportalassociation, 'erpportalusername'=> $erpportalusername, 'nextrenewaldate'=> $nextrenewaldate, 'installbystaff'=> $installbystaff, 'communication'=> $communication, 'address'=> $address, 'created_at'=>date('Y-m-d H:i:s'));
+                $name = $this->security->xss_clean($this->input->post('name'));
+                $username = $this->security->xss_clean($this->input->post('username'));
+                $password = $this->security->xss_clean($this->input->post('password'));
+				$description = $this->security->xss_clean($this->input->post('description'));
+				$type = $this->security->xss_clean($this->input->post('type'));
+				$server = $this->security->xss_clean($this->input->post('serverid'));
+                $instance = $this->security->xss_clean($this->input->post('instanceid'));
+				$status = $this->security->xss_clean($this->input->post('status'));
+	
+		
+                $databaseInfo = array('instanceid'=> $instance, 'serverid'=> $server, 'type'=> $type, 'name'=> $name, 'username'=>$username, 'password'=>$password, 'description'=> $description, 'created_at'=>date('Y-m-d H:i:s'), 'status'=> $status );
                 
                 $this->load->model('database_model');
                 $result = $this->database_model->addNewDatabase($databaseInfo);
+
+                var_dump($result);
+                
                 
                 if($result > 0)
                 {
@@ -137,9 +130,10 @@ class Databases extends BaseController
                 }
                 else
                 {
+                    var_dump($result);
                     $this->session->set_flashdata('error', 'Database creation failed');
                 }
-                
+                var_dump($result);
                 redirect('addNewDb');
             }
         }
@@ -160,11 +154,11 @@ class Databases extends BaseController
         {
             if($databaseId == null)
             {
-                redirect('vehicleListing');
+                redirect('databaseListing');
             }
             $data['databaseInfo'] = $this->database_model->getDatabaseInfo($databaseId);
 			
-			$this->global['edit_customers'] = $this->vehicle_model->getCustomersName();
+			$this->global['edit_databases'] = $this->database_model->getDatabasesName();
 
             $this->global['pageTitle'] = 'Environment SIT : Edit Database';
             
@@ -261,15 +255,15 @@ class Databases extends BaseController
 				$communication = $this->security->xss_clean($this->input->post('communication'));
 				$address = $this->security->xss_clean($this->input->post('address'));
                 
-                $vehicleInfo = array();
+                $databaseInfo = array();
                 
                 if($vehiclemake)
                 {
                     									
-				$vehicleInfo = array('cid'=> $cid, 'vehiclemake'=>$vehiclemake, 'vehiclemodel'=>$vehiclemodel, 'vehiclemadeyear'=> $vehiclemadeyear, 'vehicleregistrationnumber'=> $vehicleregistrationnumber, 'vehiclenumber'=> $vehiclenumber, 'ownername'=> $ownername, 'gpskitinstalldate'=> $gpskitinstalldate, 'eminumber'=> $eminumber, 'gpskitmobilenumber'=> $gpskitmobilenumber, 'gpsdevicemodelnumber'=> $gpsdevicemodelnumber, 'erpportalassociation'=> $erpportalassociation, 'erpportalusername'=> $erpportalusername, 'nextrenewaldate'=> $nextrenewaldate, 'installbystaff'=> $installbystaff, 'communication'=> $communication, 'address'=> $address, 'updated_at'=>date('Y-m-d H:i:s'));
+				$databaseInfo = array('cid'=> $cid, 'vehiclemake'=>$vehiclemake, 'vehiclemodel'=>$vehiclemodel, 'vehiclemadeyear'=> $vehiclemadeyear, 'vehicleregistrationnumber'=> $vehicleregistrationnumber, 'vehiclenumber'=> $vehiclenumber, 'ownername'=> $ownername, 'gpskitinstalldate'=> $gpskitinstalldate, 'eminumber'=> $eminumber, 'gpskitmobilenumber'=> $gpskitmobilenumber, 'gpsdevicemodelnumber'=> $gpsdevicemodelnumber, 'erpportalassociation'=> $erpportalassociation, 'erpportalusername'=> $erpportalusername, 'nextrenewaldate'=> $nextrenewaldate, 'installbystaff'=> $installbystaff, 'communication'=> $communication, 'address'=> $address, 'updated_at'=>date('Y-m-d H:i:s'));
                 }
                
-                $result = $this->vehicle_model->editVehicle($vehicleInfo, $databaseId);
+                $result = $this->database_model->editDatabase($databaseInfo, $databaseId);
 			
                 if($result == true)
                 {

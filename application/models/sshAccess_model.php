@@ -101,4 +101,15 @@ class SshAccess_model extends CI_Model
         return $query->row();
     }
 
+    function getAppServerCount()
+    {
+        $this->db->select('count(1) as count');
+        $this->db->from('access');
+        $this->db->where('status', 'A');
+        $this->db->where('type', '2');
+        $query = $this->db->get();
+        
+        return $query->result();
+    }
+
 }  

@@ -26,6 +26,26 @@ class Server_model extends CI_Model
         return $result;
     }
         
+    function instanceListing($serverid)
+    {
+        $this->db->select('s.servername, concat(s.ip_address, "/", i.instancename) as ip');
+        $this->db->from('servers as s');
+        $this->db->join('serverandinstance as si', 's.serverid = si.serverid','inner');
+        $this->db->join('instances as i', 'si.instanceid = i.instanceid','inner');
+        $this->db->where('s.serverid', $serverid);
+
+    }
+
+    function schemaListing($instanceid)
+    {
+        $this->db->select('i.instancename, a.username, a.password, a.description');
+        $this->db->from('instance as i');
+        $this->db->join('access as a', 'i.instanceid = a.instanceid','inner');
+        $this->db->where('a.type', '1');
+        $this->db->where('i.instanceid', $instanceid);
+
+    }
+
     /**
      * This function is used to add new customer to system
      * @return number $insert_id : This is last inserted id
@@ -122,6 +142,15 @@ class Server_model extends CI_Model
         $this->db->group_by('type');
         $query = $this->db->get();
 
+        return $query->result();
+    }
+    function getServerCount()
+    {
+        $this->db->select('count(1) as count');
+        $this->db->from('servers');
+        $this->db->where('status', 'A');
+        $query = $this->db->get();
+        
         return $query->result();
     }
 

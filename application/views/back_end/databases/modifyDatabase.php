@@ -3,8 +3,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <i class="fa fa-cab"></i> Vehicles Management
-        <small>Edit Vehicle Informations</small>
+        <i class="fa fa-cab"></i> Database
+        <small>Засах</small>
       </h1>
     </section>
     
@@ -20,8 +20,8 @@
                     </div><!-- /.box-header -->
                     <!-- form start -->
                     
-                    <form role="form" action="<?php echo base_url() ?>editVehicle" method="post" id="editVehicle">
-					<input type="hidden" value="<?php echo $vehicleInfo->id; ?>" name="vehicleId" id="vehicleId" />    
+                    <form role="form" action="<?php echo base_url() ?>editDatabase" method="post" id="editDatabase">
+					<input type="hidden" value="<?php echo $databaseInfo->id; ?>" name="id" id="id" />    
                         <div class="box-body">
 						<div class="row"><div class="col-md-12">     
 						<div class="text-center">

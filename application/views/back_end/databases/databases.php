@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-xs-12 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addNewVehicle"><i class="fa fa-plus"></i> Нэмэх</a>
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addNewDatabase"><i class="fa fa-plus"></i> Нэмэх</a>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
                   <th>Схем</th>
                   <th>Нууц үг</th>
 				  <th>IP хаяг</th>
-                  <th>Дэлгэрэнгүй</th>
+                  <th>Тайлбар</th>
                   <th>Үйлдэл</th>
                 </tr>
                 </thead>
@@ -51,10 +51,8 @@
                   <td data-title = "Password"> &nbsp;&nbsp;
                   <input name = "viewPass" type="password" value = "<?php if($record->password) { echo $record->password; } else { echo 'N/A';}?>" readonly>
                     <button type = "button" id="" class = "btn btn-sm btn-primary" name = "dynamic"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                  
                     </td>
 				  <td> <?php if($record->ip) { echo $record->ip; } else { echo 'N/A';}?></td>
-                  <!-- <td> <?php if($record->instancename) { echo $record->instancename; } else { echo 'N/A';}?></td> -->
 				  <td> <?php if($record->description) { echo $record->description; } else { echo 'N/A';}?></td>
                    <td class="text-center">
                            <a class="btn btn-sm btn-primary" href="<?php echo base_url().'viewDatabase/'.$record->id; ?>" title="View"><i class="fa fa-info" aria-hidden="true"></i></i></a>&nbsp;

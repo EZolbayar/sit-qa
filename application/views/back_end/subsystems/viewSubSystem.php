@@ -28,7 +28,7 @@
                                 </div>  
 								<div class="col-md-5">
                                     <div class="form-group">
-                                         <?php echo $customerInfo->fullname; ?>
+                                         <?php echo $Info->fullname; ?>
                                     </div>
                                 </div>  
                             </div>

@@ -46,8 +46,8 @@
                 <tr>
                   <td><?php echo $i;?>.</td>
                   <td><?php echo $record->servername; ?></td>
-                  <td><?php if($record->ip_address) { echo $record->ip_address; } else { echo 'N/A';}?></td>
-                  <td> <?php if($record->server_info) { echo $record->server_info; } else { echo 'N/A';}?></td>
+                  <td><?php echo $record->ip_address ? $record->ip_address : 'N/A';?></td>
+                  <td> <?php echo $record->server_info ? $record->server_info : 'N/A';?></td>
 				  <td> <?php if($record->description) { echo $record->description; } else { echo 'N/A';}?></td>
                    <td class="text-center">
                            <a class="btn btn-sm btn-primary" href="<?php echo base_url().'viewServer/'.$record->serverid; ?>" title="View"><i class="fa fa-info"></i></a>&nbsp;

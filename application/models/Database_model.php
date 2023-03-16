@@ -34,12 +34,17 @@ class Database_model extends CI_Model
      */
     function addNewDatabase($databaseInfo)
     {
+        
         $this->db->trans_start();
-        $this->db->insert('tbl_vehicles', $databaseInfo);
+        $this->db->insert('access', $databaseInfo);
+
         
         $insert_id = $this->db->insert_id();
+        var_dump($insert_id);
         
         $this->db->trans_complete();
+
+        var_dump($insert_id);
         
         return $insert_id;
     }
@@ -52,6 +57,7 @@ class Database_model extends CI_Model
     function getDatabaseInfo($databaseId)
     {
         $this->db->from('access');
+        $this->db->where('type', '1');
         $this->db->where('status', 'A');
         $this->db->where('id', $databaseId);
         $query = $this->db->get();
@@ -80,7 +86,8 @@ class Database_model extends CI_Model
     function deleteDatabase($id)
     {
 		$this->db->where('id', $id);
-		$this->db->delete('tbl_vehicles');
+		$this->db->delete('access');
+        // $this->where('type', '1');
         
         return $this->db->affected_rows();
     }
@@ -118,9 +125,10 @@ class Database_model extends CI_Model
      */
     function getServerInfoById($dbId)
     {
-        $this->db->select('id, fullname');
-        $this->db->from('tbl_customers');
+        $this->db->select('id, name');
+        $this->db->from('access');
         $this->db->where('status', 'A');
+        $this->db->where('type', '1');
         $this->db->where('id', $dbId);
         $query = $this->db->get();
 
@@ -133,22 +141,43 @@ class Database_model extends CI_Model
      * This function is used to get the user roles information
      * @return array $result : This is result of the query
      */
-    function getServersName()
+    function getDatabasesName()
     {
-        $this->db->select('id, fullname');
-        $this->db->from('tbl_customers');
-		$this->db->order_by('fullname', 'ASC');
+        $this->db->select('id, name');
+        $this->db->from('access');
+        $this->db->where('type', '1');
+		$this->db->order_by('name', 'ASC');
         $query = $this->db->get();
         
         return $query->result();
     }
     function getInstanceName()
     {
-        $this->db->select('instancename');
+        $this->db->select('instanceid, instancename');
         $this->db->from('instances');
-		$this->db->order_by('instancename', 'ASC');
+		$this->db->order_by('instanceid', 'ASC');
         $query = $this->db->get();
-        var_dump($query->result());
+        return $query->result();
+    }
+
+    function getServerName()
+    {
+        $this->db->select('serverid, servername');
+        $this->db->from('servers');
+		$this->db->where('type', '1');
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    function getDatabaseCount()
+    {
+        $this->db->select('count(1) as count');
+        $this->db->from('access');
+        $this->db->where('status', 'A');
+        $this->db->where('type', '1');
+        $query = $this->db->get();
+        
         return $query->result();
     }
 }  

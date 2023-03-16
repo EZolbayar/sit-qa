@@ -14,6 +14,10 @@ class BaseController extends CI_Controller {
 	protected $roleText = '';
 	protected $global = array ();
 	protected $lastLogin = '';
+	// protected $countServer = '';
+	// protected $countSystem = '';
+	// protected $countDatabase = '';
+	// protected $countApp = '';
 	
 	/**
 	 * Takes mixed data and optionally a status code, then creates the response
@@ -65,7 +69,7 @@ class BaseController extends CI_Controller {
 	 * This function is used to check the access
 	 */
 	function isTicketter() {
-		if ($this->role != ROLE_ADMIN || $this->role != ROLE_MANAGER) {
+		if ($this->role != ROLE_ADMIN || $this->role != ROLE_VIEWER) {
 			return true;
 		} else {
 			return false;

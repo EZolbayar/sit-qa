@@ -28,7 +28,7 @@ class User_model extends CI_Model
         $this->db->where('u.isDeleted', 0);
         $this->db->where('u.roleId !=', 1);
         $query = $this->db->get();
-        
+        // var_dump($query->num_rows());
         return $query->num_rows();
     }
     
@@ -58,7 +58,10 @@ class User_model extends CI_Model
         $query = $this->db->get();
         
         $result = $query->result();
-        
+        // echo '<pre>';
+        // var_dump($result);
+        // echo '</pre>';
+
         return $result;
     }
   
@@ -78,7 +81,8 @@ class User_model extends CI_Model
         $result = $query->result();   
         return $result;
     }
-	  
+	 
+    
     /**
      * This function is used to get the user roles information
      * @return array $result : This is result of the query

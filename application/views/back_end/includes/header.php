@@ -44,9 +44,9 @@
       <!-- Logo -->
       <a href="<?php echo base_url(); ?>" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>env</b>&nbsp;SIT</span>
+        <span class="logo-mini"><b>SIT</b></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Environment</b>&nbsp;SIT</span>
+        <span class="logo-lg"><b>SIT Орчин</b></span>
       </a>
       <!-- Header Navbar: style can be found in header.less -->
 
@@ -107,7 +107,7 @@
       <section class="sidebar">
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-          <li class="header">MAIN NAVIGATION </li>
+          <li class="header">Үндсэн цэс</li>
           <li>
             <a href="<?php echo base_url(); ?>dashboard">
               <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
@@ -159,7 +159,7 @@
             </ul>
           </li> -->
           <?php
-          if ($role == ROLE_ADMIN || $role == ROLE_MANAGER) {
+          if ($role == ROLE_ADMIN ) {
           ?>
             <!-- <li>
               <a href="#" >
@@ -175,19 +175,20 @@
             </li> -->
           <?php
           }
-          if ($role == ROLE_ADMIN) {
+          if ($role == ROLE_ADMIN || $role == ROLE_MANAGER)  {
+            echo $role;
           ?>
 
-            <li class="treeview">
-              <a href="#"><span><i class="fa fa-server"></i>&nbsp;&nbsp;Manage Servers</span></a>
-              <ul class="treeview-menu icon">
+            <li>
+              <a href="<?php echo base_url(); ?>serverListing"><span><i class="fa fa-server"></i>&nbsp;&nbsp;Сервер</span></a>
+              <!-- <ul class="treeview-menu icon">
                 <li><i class="fa fa-th-list"></i>&nbsp;&nbsp;<a href="<?php echo base_url(); ?>serverListing">Servers Listing</a></li>
                 <li><i class="fa fa-plus"></i>&nbsp;&nbsp;<a href="<?php echo base_url(); ?>addNewServer">Add Servers</a></li>
-              </ul>
+              </ul> -->
             </li>
 
-            <li class="treeview">
-              <a href="#"><span><i class="fa fa-database"></i>&nbsp;&nbsp;Manage Databases</span></a>
+            <li>
+              <a href="<?php echo base_url(); ?>databaseListing"><span><i class="fa fa-database"></i>&nbsp;&nbsp;Databases</span></a>
               <ul class="treeview-menu icon">
 
                 <?php
@@ -195,7 +196,6 @@
                   var_dump($instanceName);
                   foreach($instanceName as $name){
                     var_dump($instanceName);
-                    print('aaaa');
                 ?>    
                 <li><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;<a href ="<?php echo $name->instancename ?>"></a></li>
                 <?php    
@@ -203,24 +203,24 @@
                 }
                 ?>
 
-                <li><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;<a href="<?php echo base_url(); ?>databaseListing">Database Listing</a></li>
-                <li><a href="<?php echo base_url(); ?>addNewDatabase">Add Database</a></li>
+                <!-- <li><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;<a href="<?php echo base_url(); ?>databaseListing">Database Listing</a></li>
+                <li><a href="<?php echo base_url(); ?>addNewDatabase">Add Database</a></li> -->
               </ul>
             </li>
 
-            <li class="treeview">
-              <a href="#"><span><i class="fa fa-desktop"></i>&nbsp;&nbsp;Manage Subsystems</span></a>
-              <ul class="treeview-menu icon">
+            <li>
+              <a href="<?php echo base_url(); ?>subsystemListing"><span><i class="fa fa-desktop"></i>&nbsp;&nbsp;Дэд систем</span></a>
+              <!-- <ul class="treeview-menu icon">
                 <li><a href="<?php echo base_url(); ?>subsystemListing">Subsystems Listing</a></li>
-                <!-- <li><a href="<?php echo base_url(); ?>invoiceListing">Manage Invoices</a></li> -->
-              </ul>
+                <li><a href="<?php echo base_url(); ?>invoiceListing">Manage Invoices</a></li>
+              </ul> -->
             </li>
-            <li class="treeview">
-              <a href="#"><span><i class="fa fa-microchip"></i>&nbsp;&nbsp;SSH Access</span></a>
-              <ul class="treeview-menu icon">
+            <li>
+              <a href="<?php echo base_url(); ?>sshAccessListing"><span><i class="fa fa-microchip"></i>&nbsp;&nbsp;Апп Сервер</span></a>
+              <!-- <ul class="treeview-menu icon">
                 <li><a href="<?php echo base_url(); ?>sshAccessListing">SSH access Listing</a></li>
                 <li><a href="<?php echo base_url(); ?>addSshAccess">Add SSH Access</a></li>
-              </ul>
+              </ul> -->
             </li>
             <!-- <li class="treeview">
               <a href="#"><span><i class="fa fa-microchip"></i>&nbsp;&nbsp;Deploy</span></a>
