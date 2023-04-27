@@ -63,26 +63,22 @@ class User extends BaseController
             $searchText = $this->security->xss_clean($this->input->post('searchText'));
             //var_dump($searchText);
             $data['searchText'] = $searchText;
-            
+            $this->global['searchBody'] = 'Yes';
             $this->load->library('pagination');
             
-            $count = $this->user_model->userListingCount($searchText);
+            $count = $this->user_model->userListingCount();
             //var_dump($count);
 
 			$returns = $this->paginationCompress( "userListing/", $count, 10);
-            echo '<pre>';
-            var_dump($returns);
-            echo '</pre>';
+            // echo '<pre>';
+            // var_dump($returns);
+            // echo '</pre>';
 
             $data['userRecords'] = $this->user_model->userListing($searchText, $returns["page"], $returns["segment"]);
-            echo '<pre>';
-            var_dump($data['userRecords']);
-            echo '</pre>';
+            // echo '<pre>';
+            // var_dump($data['userRecords']);
+            // echo '</pre>';
             $this->global['pageTitle'] = 'Environment SIT : User Listing';
-
-            // echo '<pre>';
-            // var_dump($data);
-            // echo '<pre>';
             
             $this->loadViews("back_end/users", $this->global, $data, NULL);
         }

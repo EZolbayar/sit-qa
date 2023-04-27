@@ -50,9 +50,11 @@
                   <td><?php if($record->username) { echo $record->username; } else { echo 'N/A';}?></td>
                   <td data-title = "Password"> &nbsp;&nbsp;
                   <input name = "viewPass" type="password" value = "<?php if($record->password) { echo $record->password; } else { echo 'N/A';}?>" readonly>
-                    <button type = "button" id="" class = "btn btn-sm btn-primary" name = "dynamic"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                    <button type = "button" class = "btn btn-sm btn-primary right" name = "dynamic"><i class="fa fa-eye" aria-hidden="true"></i></button>
                     </td>
-				  <td> <?php if($record->ip) { echo $record->ip; } else { echo 'N/A';}?></td>
+				  <td id = "myInput"> <?php if($record->ip) { echo $record->ip; } else { echo 'N/A';}?>
+                  <button name = "copyBtn" class = "btn btn-sm btn-primary"> <i class="fa fa-clipboard" aria-hidden="true"></i></button>
+                    </td>
 				  <td> <?php if($record->description) { echo $record->description; } else { echo 'N/A';}?></td>
                    <td class="text-center">
                            <a class="btn btn-sm btn-primary" href="<?php echo base_url().'viewDatabase/'.$record->id; ?>" title="View"><i class="fa fa-info" aria-hidden="true"></i></i></a>&nbsp;
@@ -96,8 +98,11 @@
     myButton.forEach(function(element, index){
     element.onclick = function(){
         'use strict';
-
+        //alert(index);
+       // index = 0;
+       // alert(myInput[index].type);
         if (myInput[index].type == 'password') {
+            
             myInput[index].setAttribute('type', 'text');
             element.firstChild.textContent = '';
             element.firstChild.className = "fa fa-eye-slash";
@@ -105,8 +110,8 @@
         } else {
             myInput[index].setAttribute('type', 'password');
             element.firstChild.textContent = '';
-                element.firstChild.className = "fa fa-eye";
+            element.firstChild.className = "fa fa-eye";
         }
     }
-    })
+    });
 </script>

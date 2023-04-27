@@ -52,7 +52,7 @@
         <?php } ?>
         <form action="<?php echo base_url(); ?>loginMe" method="post">
           <div class="form-group has-feedback">
-            <input type="email" class="form-control" placeholder="мэйл хаяг" name="email" required />
+            <input type="text" class="form-control" placeholder="Нэвтрэх нэр" name="email" required />
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">

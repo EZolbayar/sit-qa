@@ -21,19 +21,19 @@
                     <h3 class="box-title">List of Users</h3>
                     <div class="box-tools">
                         <form action="<?php echo base_url() ?>userListing" method="POST" id="searchList">
-                            <div class="input-group">
+                            <!-- <div class="input-group">
                               <input type="text" name="searchText" value="<?php echo $searchText; ?>" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
                               <div class="input-group-btn">
                                 <button class="btn btn-sm btn-default searchList"><i class="fa fa-search"></i></button>
                               </div>
-                            </div>
+                            </div> -->
                         </form>
                     </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                   <table class="table table-hover">
                     <tr>
-					 <th>Sr. #</th>
+					    <th>№</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Mobile</th>
@@ -66,9 +66,9 @@
                   </table>
                   
                 </div><!-- /.box-body -->
-                <div class="box-footer clearfix">
+                <!-- <div class="box-footer clearfix">
                     <?php echo $this->pagination->create_links(); ?>
-                </div>
+                </div> -->
               </div><!-- /.box -->
             </div>
         </div>

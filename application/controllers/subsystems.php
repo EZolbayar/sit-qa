@@ -26,7 +26,7 @@ class Subsystems extends BaseController
      */
     public function index()
     { 
-        $this->global['pageTitle'] = 'WorldTrack GPS : Dashboard';
+        $this->global['pageTitle'] = 'Environment SIT : Dashboard';
         
         $this->loadViews("back_end/dashboard", $this->global, NULL , NULL);
     }
@@ -47,7 +47,7 @@ class Subsystems extends BaseController
 			
             $data['subsystemRecords'] = $this->subsystem_model->subsystemListing();
 			
-            $this->global['pageTitle'] = 'WorldTrack GPS : Subsystem Listing';
+            $this->global['pageTitle'] = 'Environment SIT : Subsystem Listing';
             
             $this->loadViews("back_end/subsystems/subsystems", $this->global, $data, NULL);
         }
@@ -67,7 +67,7 @@ class Subsystems extends BaseController
             $this->load->model('customer_model');
             $data = "";
 			
-            $this->global['pageTitle'] = 'WorldTrack GPS : Add New Customer';
+            $this->global['pageTitle'] = 'Environment SIT : Add New Customer';
 
             $this->loadViews("back_end/customers/addCustomer", $this->global, $data, NULL);
         }
@@ -146,7 +146,7 @@ class Subsystems extends BaseController
 			//$str = $this->db->last_query();
             //echo "<pre>";  print_r($str);
 			//exit;
-            $this->global['pageTitle'] = 'WorldTrack GPS : Edit Customer';
+            $this->global['pageTitle'] = 'Environment SIT : Edit Customer';
             
             $this->loadViews("back_end/customers/modifyCustomer", $this->global, $data, NULL);
         }
@@ -173,7 +173,7 @@ class Subsystems extends BaseController
             
             $data['customerInfo'] = $this->customer_model->getCustomerInfoById($customerId);
             
-            $this->global['pageTitle'] = 'WorldTrack GPS : View Customer';
+            $this->global['pageTitle'] = 'Environment SIT : View Customer';
             
             $this->loadViews("back_end/customers/viewCustomer", $this->global, $data, NULL);
         }

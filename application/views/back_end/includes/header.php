@@ -113,83 +113,17 @@
               <i class="fa fa-dashboard"></i> <span>Dashboard</span></i>
             </a>
           </li>
-          <!--<li>
-              <a href="#" >
-                <i class="fa fa-plane"></i>
-                <span>New Task</span>
-              </a>
-            </li>-->
-          <!--<li>
-              <a href="#" >
-                <i class="fa fa-ticket"></i>
-                <span>My Tasks</span>
-              </a>
-            </li>-->
-          <!-- <li class="treeview">
-            <a href="#">
-              <i class="fa fa-share"></i> <span>Multilevel</span>
-              <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-            </a>
-            <ul class="treeview-menu">
-              <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-              <li class="treeview">
-                <a href="#"><i class="fa fa-circle-o"></i> Level One
-                  <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                  </span>
-                </a>
-                <ul class="treeview-menu">
-                  <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                  <li class="treeview">
-                    <a href="#"><i class="fa fa-circle-o"></i> Level Two
-                      <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                      </span>
-                    </a>
-                    <ul class="treeview-menu">
-                      <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                      <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-            </ul>
-          </li> -->
+      
           <?php
-          if ($role == ROLE_ADMIN ) {
+          if ($role == ROLE_ADMIN) {
           ?>
-            <!-- <li>
-              <a href="#" >
-                <i class="fa fa-thumb-tack"></i>
-                <span>Task Status</span>
-              </a>
-            </li>
-            <li>
-              <a href="#" >
-                <i class="fa fa-upload"></i>
-                <span>Task Uploads</span>
-              </a>
-            </li> -->
-          <?php
-          }
-          if ($role == ROLE_ADMIN || $role == ROLE_MANAGER)  {
-            echo $role;
-          ?>
-
             <li>
               <a href="<?php echo base_url(); ?>serverListing"><span><i class="fa fa-server"></i>&nbsp;&nbsp;Сервер</span></a>
-              <!-- <ul class="treeview-menu icon">
-                <li><i class="fa fa-th-list"></i>&nbsp;&nbsp;<a href="<?php echo base_url(); ?>serverListing">Servers Listing</a></li>
-                <li><i class="fa fa-plus"></i>&nbsp;&nbsp;<a href="<?php echo base_url(); ?>addNewServer">Add Servers</a></li>
-              </ul> -->
+        
             </li>
-
             <li>
               <a href="<?php echo base_url(); ?>databaseListing"><span><i class="fa fa-database"></i>&nbsp;&nbsp;Databases</span></a>
-              <ul class="treeview-menu icon">
+              <!-- <ul class="treeview-menu icon">
 
                 <?php
                 if(!empty($instanceName)){
@@ -203,39 +137,56 @@
                 }
                 ?>
 
-                <!-- <li><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;<a href="<?php echo base_url(); ?>databaseListing">Database Listing</a></li>
-                <li><a href="<?php echo base_url(); ?>addNewDatabase">Add Database</a></li> -->
-              </ul>
+              </ul> -->
             </li>
-
             <li>
               <a href="<?php echo base_url(); ?>subsystemListing"><span><i class="fa fa-desktop"></i>&nbsp;&nbsp;Дэд систем</span></a>
-              <!-- <ul class="treeview-menu icon">
-                <li><a href="<?php echo base_url(); ?>subsystemListing">Subsystems Listing</a></li>
-                <li><a href="<?php echo base_url(); ?>invoiceListing">Manage Invoices</a></li>
-              </ul> -->
+             
             </li>
             <li>
               <a href="<?php echo base_url(); ?>sshAccessListing"><span><i class="fa fa-microchip"></i>&nbsp;&nbsp;Апп Сервер</span></a>
-              <!-- <ul class="treeview-menu icon">
-                <li><a href="<?php echo base_url(); ?>sshAccessListing">SSH access Listing</a></li>
-                <li><a href="<?php echo base_url(); ?>addSshAccess">Add SSH Access</a></li>
-              </ul> -->
+           
             </li>
-            <!-- <li class="treeview">
-              <a href="#"><span><i class="fa fa-microchip"></i>&nbsp;&nbsp;Deploy</span></a>
-              <ul class="treeview-menu icon">
-                <li><a href="<?php echo base_url(); ?>sshAccessListing">SSH access Listing</a></li>
-                <li><a href="<?php echo base_url(); ?>addSshAccess">Add SSH Access</a></li>
-              </ul>
-            </li> -->
             <li>
               <a href="<?php echo base_url(); ?>userListing">
                 <i class="fa fa-users"></i>
                 <span>Manage Users</span>
               </a>
             </li>
+          <?php
+          }
+          elseif ($role == ROLE_MANAGER)  {
+          ?>
+          <li>
+              <a href="<?php echo base_url(); ?>serverListing"><span><i class="fa fa-server"></i>&nbsp;&nbsp;Сервер</span></a>
+        
+            </li>
+            <li>
+              <a href="<?php echo base_url(); ?>databaseListing"><span><i class="fa fa-database"></i>&nbsp;&nbsp;Databases</span></a>
+              <!-- <ul class="treeview-menu icon">
 
+                <?php
+                if(!empty($instanceName)){
+                  var_dump($instanceName);
+                  foreach($instanceName as $name){
+                    var_dump($instanceName);
+                ?>    
+                <li><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;<a href ="<?php echo $name->instancename ?>"></a></li>
+                <?php    
+                  }
+                }
+                ?>
+
+              </ul> -->
+            </li>
+            <li>
+              <a href="<?php echo base_url(); ?>subsystemListing"><span><i class="fa fa-desktop"></i>&nbsp;&nbsp;Дэд систем</span></a>
+             
+            </li>
+            <li>
+              <a href="<?php echo base_url(); ?>sshAccessListing"><span><i class="fa fa-microchip"></i>&nbsp;&nbsp;Апп Сервер</span></a>
+           
+            </li>
 
           <?php
           }

@@ -1,11 +1,11 @@
 <?php if(!defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * Class : User_model (User Model)
- * User model class to get to handle user related data 
- * @author : Rajesh Gupta
- * @version : 1.1
- * @since : 15 November 2019
+ * Class : Customer (Customer Model)
+ * Customer model class to get to handle user related data 
+ * @author : Zolbayar
+ * @version : 1.0
+ * @since : 08 FEB 2023
  */
 class User_model extends CI_Model
 {
@@ -39,23 +39,32 @@ class User_model extends CI_Model
      * @param number $segment : This is pagination limit
      * @return array $result : This is result
      */
-    function userListing($searchText = '', $page, $segment)
+    // function userListing($searchText = '', $page, $segment)
+    function userListing()
     {
         $this->db->select('u.userId, u.email, u.name, u.mobile, u.createdDtm, r.role');
         $this->db->from('users as u');
         $this->db->join('roles as r', 'r.roleId = u.roleId','left');
-       
-        if(!empty($searchText)) {
-            $likeCriteria = "(u.email  LIKE '%".$searchText."%'
-                            OR  u.name  LIKE '%".$searchText."%'
-                            OR  u.mobile  LIKE '%".$searchText."%')";
-            $this->db->where($likeCriteria);
-        }
+        //var_dump($searchText);
+        // if(!empty($searchText)) {
+        //     $likeCriteria = "(u.email  LIKE '%".$searchText."%'
+        //                     OR  u.name  LIKE '%".$searchText."%'
+        //                     OR  u.mobile  LIKE '%".$searchText."%')";
+        //     $this->db->where($likeCriteria);
+        //     // echo '<pre>';
+        //     // var_dump($likeCriteria);
+        //     // echo '</pre>';
+        // }
+        
         $this->db->where('u.isDeleted', 0);
         $this->db->where('u.roleId !=', 1);
         $this->db->order_by('u.userId', 'DESC');
-        $this->db->limit($page, $segment);
+        // $this->db->limit($page, $segment);
         $query = $this->db->get();
+
+        // echo '<pre>';
+        // var_dump($query);
+        // echo '</pre>';
         
         $result = $query->result();
         // echo '<pre>';

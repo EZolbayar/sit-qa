@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-xs-12 text-right">
                 <div class="form-group">
-                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addNewServer"><i class="fa fa-plus"></i> Нэмэх</a>
+                    <a class="btn btn-primary" href="<?php echo base_url(); ?>addNewServer"><i class="fa fa-plus"></i> &nbsp;Нэмэх</a>
                 </div>
             </div>
         </div>
